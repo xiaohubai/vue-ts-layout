@@ -1,27 +1,25 @@
 import { ElMessage } from 'element-plus';
 import { defineStore } from 'pinia';
 import router from '@/router';
-import { jsonInBlacklist } from '@/api/jwt';
 import { login } from '@/api/user';
 import { useRouterStore } from '@/pinia/modules/router';
 import { useSettingStore } from '@/pinia/modules/setting';
 import { useDictStore } from '@/pinia/modules/dict';
 
-
 export const useUserStore = defineStore('user', {
     state: () => ({
-        id: '',
-        uid: '',
+        ID: '',
+        UID: '',
         userName: '',
         nickName: '',
         birth: '',
         avatar: '',
-        roleId: '0',
+        roleID: '0',
         roleName: '',
         phone: '',
         wechat: '',
         email: '',
-        status: '',
+        state: '',
         motto: '',
         token: '',
         refreshToken: ''
@@ -30,18 +28,11 @@ export const useUserStore = defineStore('user', {
     getters: {
     },
     actions: {
-        async LoginOut() {
-            const data = {
-                token: this.$state.token,
-                refreshToken: this.$state.refreshToken
-            }
-            const res: any = await jsonInBlacklist(data)
-            if (res.code === 0) {
-                sessionStorage.clear()
-                localStorage.clear()
-                router.push({ name: 'login', replace: true })
-                window.location.reload()
-            }
+        LoginOut() {
+            sessionStorage.clear()
+            localStorage.clear()
+            router.push({ name: 'login', replace: true })
+            window.location.reload()
         },
         async LoginIn(data: any) {
             const res: any = await login(data)
@@ -57,7 +48,7 @@ export const useUserStore = defineStore('user', {
 
                 //获取动态路由配置
                 const routerStore = useRouterStore()
-                await routerStore.getRouter(this.$state.roleId)
+                await routerStore.getRouter(this.$state.roleID)
 
                 await router.replace({ name: settingStore.defaultRouter })
                 return true

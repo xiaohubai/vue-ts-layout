@@ -1,32 +1,30 @@
 <template>
-  <el-card class="search-card">
-    <el-form :inline="true" :model="searchForm">
-      <el-form-item label="路径">
-        <el-input v-model="searchForm.path" placeholder="路径" />
-      </el-form-item>
-      <el-form-item label="描述">
-        <el-input v-model="searchForm.desc" placeholder="描述" />
-      </el-form-item>
-      <el-form-item label="所属角色">
-        <el-select v-model="searchForm.roleIDs" clearable placeholder="请选择">
-          <el-option v-for="item in roleIDs" :key="item.ID" :label="`${item.value}`" :value="item.key" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="请求">
-        <el-select v-model="searchForm.method" clearable placeholder="请选择">
-          <el-option v-for="item in methods" :key="item.ID" :label="`${item.value}`" :value="item.key" />
-        </el-select>
-      </el-form-item>
-      <div class="btn-search-casbin">
-        <el-button type="primary" icon="search" @click="getTableData">查询</el-button>
-        <el-button icon="refresh" @click="searchReset">重置</el-button>
-      </div>
-    </el-form>
-
+  <el-card>
+    <div class="search-form">
+      <el-form :inline="true" :model="searchForm">
+        <el-form-item label="路径">
+          <el-input v-model="searchForm.path" placeholder="路径" />
+        </el-form-item>
+        <el-form-item label="所属角色">
+          <el-select v-model="searchForm.roleIDs" clearable placeholder="请选择">
+            <el-option v-for="item in role_info" :key="item.ID" :label="`${item.value}`" :value="item.key" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="请求">
+          <el-select v-model="searchForm.method" clearable placeholder="请选择">
+            <el-option v-for="item in method_info" :key="item.ID" :label="`${item.value}`" :value="item.key" />
+          </el-select>
+        </el-form-item>
+      </el-form>
+    </div>
+    <div class="btn-search-casbin">
+      <el-button type="primary" icon="search" @click="getTableData">查询</el-button>
+      <el-button icon="refresh" @click="searchReset">重置</el-button>
+    </div>
   </el-card>
   <el-card class="casbin-card">
     <div class="btn-add-casbin">
-      <el-button type="primary" icon="Plus" @click="addCasbin('0')">新增权限</el-button>
+      <el-button type="primary" icon="Plus" @click="addCasbin()">新增权限</el-button>
     </div>
     <el-table :data="tableData" border row-key="ID">
       <el-table-column align="left" label="ID" min-width="30" prop="ID" />
@@ -56,7 +54,7 @@
       </el-form-item>
       <el-form-item label="method" style="width:40%">
         <el-select v-model="form.method" clearable placeholder="请选择">
-          <el-option v-for="item in methods" :key="item.ID" :label="`${item.value}`" :value="item.key" />
+          <el-option v-for="item in method_info" :key="item.ID" :label="`${item.value}`" :value="item.key" />
         </el-select>
       </el-form-item>
       <el-form-item label="path" prop="path" style="width:85%">
@@ -77,7 +75,7 @@
 
 <script setup lang="ts"  name="menus">
 import { ref, reactive } from 'vue'
-import { getCasbinList, updateRoleCasbin, addRoleCasbin } from '@/api/casbin'
+import { getRoleCasbinList, updateRoleCasbin, addRoleCasbin, deleteRoleCasbin } from '@/api/casbin'
 
 import { useDictStore } from '@/pinia/modules/dict';
 import { storeToRefs } from 'pinia';
@@ -86,7 +84,6 @@ import { ElMessage } from 'element-plus'
 //搜索
 const searchForm = ref({
   path: '',
-  desc: '',
   roleIDs: '',
   method: '',
 })
@@ -94,7 +91,6 @@ const searchForm = ref({
 const initSearchForm = () => {
   searchForm.value = {
     path: '',
-    desc: '',
     roleIDs: '',
     method: '',
   }
@@ -102,17 +98,21 @@ const initSearchForm = () => {
 
 const searchReset = () => {
   initSearchForm()
+  getTableData()
 }
 
 
 const dictStore = useDictStore()
-const { roleIDs, methods } = storeToRefs(dictStore)
+const { role_info, method_info } = storeToRefs(dictStore)
 
+interface Casbin {
+  ID: number;
+  roleIDs: string;
+  path: string;
+  desc: string;
+}
 
-
-
-const tableData = ref([])
-
+const tableData = ref<Casbin[]>([])
 const page = ref(1)
 const total = ref(0)
 const pageSize = ref(10)
@@ -132,7 +132,7 @@ const getTableData = async () => {
     pageSize: pageSize.value,
     ...searchForm.value
   }
-  const res: any = await getCasbinList(data)
+  const res: any = await getRoleCasbinList(data)
   if (res.code === 0) {
     tableData.value = res.data.list
     total.value = res.data.total
@@ -148,11 +148,11 @@ const isEdit = ref(false)
 const dialogVisible = ref(false)
 
 const form = ref({
+  ID: 0,
   path: '',
   desc: '',
   roleIDs: '',
   method: '',
-
 })
 
 const rules = reactive({
@@ -164,6 +164,7 @@ const rules = reactive({
 
 const initForm = () => {
   form.value = {
+    ID: 0,
     path: '',
     desc: '',
     roleIDs: '',
@@ -171,7 +172,7 @@ const initForm = () => {
   }
 }
 
-const addCasbin = (id) => {
+const addCasbin = () => {
   initForm()
   dialogVisible.value = true
   dialogTitle.value = '新增权限'
@@ -183,6 +184,7 @@ const editCasbin = (data) => {
   dialogTitle.value = '编辑权限'
   isEdit.value = true
   form.value = {
+    ID: data.ID,
     path: data.path,
     desc: data.desc,
     roleIDs: data.roleIDs,
@@ -200,8 +202,12 @@ const closeDialog = () => {
   initForm()
 }
 
-const deleteCasbin = (id) => {
-  ElMessage({ type: 'error', message: '删除暂时不可用' })
+const deleteCasbin = async (id) => {
+  const res: any = await deleteRoleCasbin({ ID: id })
+  if (res.code === 0) {
+    ElMessage({ type: 'success', message: '删除权限成功' })
+  }
+  getTableData()
 }
 
 const submitDialog = async () => {
@@ -211,7 +217,13 @@ const submitDialog = async () => {
       ElMessage({ type: 'success', message: '更新权限成功' })
     }
   } else {
-    const res: any = await addRoleCasbin(form.value)
+    const data = {
+      path: form.value.path,
+      desc: form.value.desc,
+      roleIDs: form.value.roleIDs,
+      method: form.value.method,
+    }
+    const res: any = await addRoleCasbin(data)
     if (res.code === 0) {
       ElMessage({ type: 'success', message: '添加权限成功' })
     }
@@ -230,11 +242,10 @@ const submitDialog = async () => {
   margin-bottom: 20px;
 }
 
-.search-card {
+.search-form {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-
 }
 
 .casbin-card {
@@ -244,6 +255,7 @@ const submitDialog = async () => {
 .btn-search-casbin {
   display: flex;
   justify-content: flex-end;
+  margin-right: 14px;
 }
 
 .pagination {

@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="logo" :style="{ background: theme.backgroundColor }">
-      <img class="img" :src="appLogo">
-      <div v-if="!collapse" class="title" :style="{ color: sideMode == 'dark' ? '#fff' : '#191a23' }">{{
-        appName }}
+      <img class="img" :src="app_info.logo">
+      <div v-if="!collapse" class="title" :style="{ color: sideModeColor == 'dark' ? '#fff' : '#191a23' }">{{
+        app_info.name }}
       </div>
     </div>
 
@@ -39,14 +39,17 @@ import { useRouterStore } from '@/pinia/modules/router';
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useSettingStore } from "@/pinia/modules/setting"
+import { useDictStore } from "@/pinia/modules/dict"
 
+const router = useRouter()
 const settingStore = useSettingStore()
 const routerStore = useRouterStore()
-const router = useRouter()
+const dictStore = useDictStore()
 
 
 const { asyncRouters, activeName, activePath, activeTitle, activeList } = storeToRefs(routerStore)
-const { collapse, appLogo, sideMode, appName, activeTextColor, activeBackgroundColor } = storeToRefs(settingStore)
+const { collapse, sideModeColor, activeTextColor, activeBackgroundColor } = storeToRefs(settingStore)
+const { app_info } = storeToRefs(dictStore)
 
 const theme = ref({
   backgroundColor: '',
@@ -56,7 +59,7 @@ const theme = ref({
 })
 
 const getTheme = () => {
-  switch (sideMode.value) {
+  switch (sideModeColor.value) {
     case 'light':
       theme.value = {
         backgroundColor: '#fff',
@@ -95,7 +98,7 @@ const AddActiveRouter = (item: any) => {
   }
 }
 
-watch(() => sideMode, () => { getTheme() }, { immediate: true, deep: true })
+watch(() => sideModeColor.value, () => { getTheme() }, { immediate: true, deep: true })
 watch(() => router.currentRoute.value, (item: any) => { AddActiveRouter(item) }, { immediate: true, deep: true })
 
 </script>

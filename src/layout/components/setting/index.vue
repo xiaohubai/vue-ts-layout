@@ -9,21 +9,21 @@
         <div class="setting_card">
           <div class="setting_content">
             <div class="theme-box">
-              <div class="item" @click="changeSetting('sideMode', 'light')">
+              <div class="item" @click="changeSetting('sideModeColor', 'light')">
                 <div class="item-top">
-                  <el-icon v-if="sideMode === 'light'" class="check">
+                  <el-icon v-if="sideModeColor === 'light'" class="check">
                     <check />
                   </el-icon>
-                  <img src="https://gw.alipayobjects.com/zos/antfincdn/NQ%24zoisaD2/jpRkZQMyYRryryPNtyIC.svg">
+                  <img src="@/assets/side_light.svg">
                 </div>
                 <p>简约白</p>
               </div>
-              <div class="item" @click="changeSetting('sideMode', 'dark')">
+              <div class="item" @click="changeSetting('sideModeColor', 'dark')">
                 <div class="item-top">
-                  <el-icon v-if="sideMode === 'dark'" class="check">
+                  <el-icon v-if="sideModeColor === 'dark'" class="check">
                     <check />
                   </el-icon>
-                  <img src="https://gw.alipayobjects.com/zos/antfincdn/XwFOFbLkSM/LCkqqYNmvBEbokSDscrm.svg">
+                  <img src="@/assets/side_dark.svg">
                 </div>
                 <p>商务黑</p>
               </div>
@@ -33,13 +33,36 @@
       </div>
 
       <el-divider />
+      <div class="settingForm">
+        <el-form model="form" label-position="left" label-width="auto" size="default">
+          <el-form-item label="语言">
+            <el-select v-model="form.lang" @change="changeSetting">
+              <el-option v-for="item in lang_info" :key="item.key" :label="item.value" :value="item.key" />
+            </el-select>
+          </el-form-item>
 
-      <el-form-item label="语言">
-        <el-select v-model="lang" size="default" placeholder="选择语言">
-          <el-option label="简体中文" value="zh-cn" />
-        </el-select>
-      </el-form-item>
+          <el-form-item label="面包屑">
+            <el-radio-group v-model="form.breadcrumb" @change="changeSetting('breadcrumb', form.breadcrumb)">
+              <el-radio-button :label=true>开启</el-radio-button>
+              <el-radio-button :label=false>关闭</el-radio-button>
+            </el-radio-group>
+          </el-form-item>
 
+          <el-form-item label="侧边栏折叠">
+            <el-radio-group v-model="form.collapse" @change="changeSetting('collapse', form.collapse)">
+              <el-radio-button :label=true>开启</el-radio-button>
+              <el-radio-button :label=false>关闭</el-radio-button>
+            </el-radio-group>
+          </el-form-item>
+
+          <el-form-item label="默认路由">
+            <el-cascader v-model="form.defaultRouter" :options="menuOptions"
+              :props="{ checkStrictly: true, label: 'title', value: 'name', emitPath: false }" :show-all-levels="false"
+              filterable />
+          </el-form-item>
+
+        </el-form>
+      </div>
     </el-drawer>
   </div>
 </template>
@@ -48,18 +71,54 @@
 
 <script setup lang="ts" name="Setting">
 import { ref } from 'vue'
-
-
 import { storeToRefs } from 'pinia'
 import { useSettingStore } from "@/pinia/modules/setting"
+import { useDictStore } from '@/pinia/modules/dict';
+import { getRoleMenuList } from '@/api/menu'
+
+const dictStore = useDictStore()
+const { lang_info } = storeToRefs(dictStore)
 const settingStore = useSettingStore()
-const { sideMode } = storeToRefs(settingStore)
-const lang = "zh"
+const { sideModeColor, breadcrumb, lang, collapse, defaultRouter, activeTextColor, activeBackgroundColor } = storeToRefs(settingStore)
 
+const form = ref({
+  lang: lang,
+  breadcrumb: breadcrumb,
+  collapse: collapse,
+  defaultRouter: defaultRouter,
+  activeTextColor: activeTextColor,
+  activeBackgroundColor: activeBackgroundColor
+})
+const menuOptions = ref([])
 
+const menuListFormat = (menuOptions, list) => {
+  list.forEach(item => {
+    if (item.meta.hidden) {
+      return
+    }
+    let oData = {
+      name: item.name,
+      title: item.meta.title,
+      children: []
+    }
+    menuOptions.push(oData)
+    if (!item.children) {
+      return
+    }
+    menuListFormat(oData.children, item.children)
+  })
+}
 
+const getMenuOptions = async () => {
+  menuOptions.value = []
+  const res: any = await getRoleMenuList()
+  if (res.code === 0) {
+    const menuList = res.data[0].children
+    menuListFormat(menuOptions.value, menuList)
+  }
+}
 const changeSetting = (name, val) => {
-  settingStore.setSetting(name, val)
+  settingStore.updateSetting(name, val)
 }
 
 const drawer = ref(false)
@@ -69,6 +128,7 @@ const handleClose = () => {
 }
 const showSettingDrawer = () => {
   drawer.value = true
+  getMenuOptions()
 }
 
 
@@ -77,6 +137,13 @@ const showSettingDrawer = () => {
 </script>
 
 <style lang="scss" scoped>
+.settingForm {
+  display: flex;
+  margin-top: 14px;
+  align-items: center;
+  justify-content: left;
+}
+
 .drawer-container {
   transition: all 0.2s;
 

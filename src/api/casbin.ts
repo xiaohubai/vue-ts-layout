@@ -1,7 +1,7 @@
 import service from '@/utils/request'
-export const getCasbinList = (data) => {
+export const getRoleCasbinList = (data) => {
     return service({
-        url: '/v1/get/casbinList',
+        url: '/v1/get/roleCasbinList',
         method: 'post',
         data: data
     })
@@ -9,7 +9,7 @@ export const getCasbinList = (data) => {
 
 export const updateRoleCasbin = (data) => {
     return service({
-        url: '/v1/update/casbin',
+        url: '/v1/update/roleCasbin',
         method: 'post',
         data: data
     })
@@ -17,7 +17,16 @@ export const updateRoleCasbin = (data) => {
 
 export const addRoleCasbin = (data) => {
     return service({
-        url: '/v1/add/casbin',
+        url: '/v1/add/roleCasbin',
+        method: 'post',
+        data: data
+    })
+}
+
+
+export const deleteRoleCasbin = (data) => {
+    return service({
+        url: '/v1/delete/roleCasbin',
         method: 'post',
         data: data
     })

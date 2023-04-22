@@ -80,7 +80,6 @@ const loginVerify = () => {
     })
     picPath.value = ele.data.picPath
     loginFormData.captchaId = ele.data.captchaId
-    loginFormData.openCaptcha = ele.data.openCaptcha
   })
 }
 
@@ -95,7 +94,7 @@ const loginFormData = reactive({
   password: '123456',
   captcha: '',
   captchaId: '',
-  openCaptcha: false,
+  openCaptcha: true,
 })
 const rules = reactive({
   username: [{ validator: checkUsername, trigger: 'blur' }],

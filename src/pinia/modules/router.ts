@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import router from '@/router'
-import { getRoleMenus } from '@/api/menu'
+import { getRoleMenuList } from '@/api/menu'
 import { ElMessage } from 'element-plus'
 import { asyncRouterHandle } from '@/utils/asyncRouter'
 
@@ -18,10 +18,10 @@ export const useRouterStore = defineStore('router', {
   getters: {
   },
   actions: {
-    async getRouter(roleId: string) {
-      const res: any = await getRoleMenus(roleId)
+    async getRouter(roleID: string) {
+      const res: any = await getRoleMenuList()
       if (res.code === 0) {
-        const menus = res.data.list
+        const menus = res.data
         asyncRouterHandle(menus)
         this.asyncRouters = menus
         this.asyncRouters.forEach(asyncRouter => {

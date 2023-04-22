@@ -12,21 +12,18 @@ export default [
                             "roleIDs": "0",
                             "path": "/v1/add/casbin",
                             "method": "POST",
-                            "desc": '增加权限路由'
                         },
                         {
                             "ID": 3,
                             "roleIDs": "0",
                             "path": "/v1/get/dict",
                             "method": "POST",
-                            "desc": '获取字典序'
                         },
                         {
                             "ID": 4,
                             "roleIDs": "0",
                             "path": "/v1/get/casbinList",
                             "method": "POST",
-                            "desc": '获取权限列表'
                         },
                         {
                             "ID": 5,

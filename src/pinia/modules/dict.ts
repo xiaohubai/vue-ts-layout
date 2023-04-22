@@ -4,8 +4,13 @@ import { ElMessage } from 'element-plus'
 
 export const useDictStore = defineStore('dict', {
     state: () => ({
-        roleIDs: [],
-        methods: []
+        app_info: {
+            name: "",
+            logo: ""
+        },
+        lang_info: [],
+        role_info: [],
+        method_info: []
 
     }),
     persist: true,
@@ -13,7 +18,7 @@ export const useDictStore = defineStore('dict', {
     },
     actions: {
         async getDict() {
-            const res: any = await getDictList({ type: 'all' })
+            const res: any = await getDictList()
             if (res.code === 0) {
                 this.$state = res.data
                 return true

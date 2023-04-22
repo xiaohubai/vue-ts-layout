@@ -17,14 +17,14 @@ router.beforeEach(async (to: any, from: any) => {
     const userStore = useUserStore()
 
     const { defaultRouter } = storeToRefs(settingStore)
-    const { token, roleId } = storeToRefs(userStore)
+    const { token, roleID } = storeToRefs(userStore)
     to.meta.matched = [...to.matched]
 
     if (whiteList.includes(to.name)) {
         if (token.value) {
             if (!isRefresh) {
                 isRefresh = true
-                await routerStore.getRouter(roleId.value)
+                await routerStore.getRouter(roleID.value)
             }
             if (defaultRouter.value) {
                 return { name: defaultRouter.value }
@@ -38,7 +38,7 @@ router.beforeEach(async (to: any, from: any) => {
     } else {
         if (token.value) {
             if (!isRefresh) {
-                await routerStore.getRouter(roleId.value)
+                await routerStore.getRouter(roleID.value)
                 isRefresh = true
                 if (token.value) {
                     return { ...to, replace: true }
