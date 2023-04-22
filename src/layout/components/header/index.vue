@@ -16,7 +16,7 @@
             </div>
         </div>
         <el-divider />
-        <div class="breadcrumb">
+        <div class="breadcrumb" v-if="breadcrumb === true">
             <Breadcrumb />
         </div>
 
@@ -34,11 +34,11 @@ import { useSettingStore } from "@/pinia/modules/setting"
 const routerStore = useRouterStore()
 const settingStore = useSettingStore()
 
-const { collapse, breadcrumb } = storeToRefs(settingStore)
+const { breadcrumb } = storeToRefs(settingStore)
 const { activeTitle } = storeToRefs(routerStore)
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .header {
     display: flex;
     align-items: center;

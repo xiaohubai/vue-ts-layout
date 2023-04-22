@@ -26,7 +26,7 @@ export const useSettingStore = defineStore('setting', {
             ElMessage({ type: 'error', message: '获取配置失败' })
             return false
         },
-        async updateSetting(form: any) {
+        async updateSetting(name: any, val: any) {
             const data = {
                 "lang": this.$state.lang,
                 "sideModeColor": this.$state.sideModeColor,
@@ -37,7 +37,7 @@ export const useSettingStore = defineStore('setting', {
                 "activeBackgroundColor": this.$state.activeBackgroundColor
             }
             data[name] = val
-            const res: any = await updateSetting(form)
+            const res: any = await updateSetting(data)
             if (res.code === 0) {
                 this.$state[name] = val
                 ElMessage({ type: 'success', message: '设置成功' })

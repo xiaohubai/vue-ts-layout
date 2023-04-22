@@ -87,12 +87,8 @@
 <script setup lang="ts"  name="menus">
 import { ref, reactive } from 'vue'
 import { getAllMenuList, updateRoleMenu, addRoleMenu, deleteRoleMenu } from '@/api/menu'
-import { useUserStore } from '@/pinia/modules/user';
-import { storeToRefs } from 'pinia';
 import { ElMessage } from 'element-plus'
 
-const userStore = useUserStore()
-const { roleID } = storeToRefs(userStore)
 const tableData = ref([])
 const menuListFormat = (tableData, options, list) => {
   list.forEach(item => {
@@ -124,8 +120,6 @@ const menuListFormat = (tableData, options, list) => {
     menuListFormat(tData.children, oData.children, item.children)
   })
 }
-
-
 
 const getTableData = async () => {
   tableData.value = []
@@ -172,7 +166,7 @@ const rules = reactive({
   sort: [{ required: true, message: '必填', trigger: 'blur' }],
 })
 
-const initForm = () => {
+const init = () => {
   form.value = {
     ID: 0,
     name: '',
@@ -223,6 +217,8 @@ const deleteMenu = async (id) => {
     ElMessage({ type: 'error', message: '删除菜单失败' + res.msg })
   }
   getTableData()
+  init()
+  window.location.reload()
 }
 
 const submitDialogbyBtn = async () => {
@@ -254,19 +250,20 @@ const submitDialogbyBtn = async () => {
     }
   }
   getTableData()
-  initForm()
+  init()
   dialogVisible.value = false
+  window.location.reload()
 }
 
 const handleClose = (done) => {
   dialogVisible.value = false
-  initForm()
+  init()
   done()
 }
 
 const closeDialogByBtn = () => {
   dialogVisible.value = false
-  initForm()
+  init()
 }
 
 

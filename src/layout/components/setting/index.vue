@@ -4,7 +4,6 @@
       <el-button type="primary" class="drawer-container" icon="Setting" @click="showSettingDrawer" />
     </el-affix>
     <el-drawer v-model="drawer" title="主题配置" :direction="direction" :before-close="handleClose">
-
       <div class="setting_body">
         <div class="setting_card">
           <div class="setting_content">
@@ -31,14 +30,18 @@
           </div>
         </div>
       </div>
-
       <el-divider />
       <div class="settingForm">
         <el-form model="form" label-position="left" label-width="auto" size="default">
           <el-form-item label="语言">
-            <el-select v-model="form.lang" @change="changeSetting">
+            <el-select v-model="form.lang" @change="changeSetting('lang', form.lang)">
               <el-option v-for="item in lang_info" :key="item.key" :label="item.value" :value="item.key" />
             </el-select>
+          </el-form-item>
+          <el-form-item label="默认路由">
+            <el-cascader v-model="form.defaultRouter" :options="menuOptions"
+              :props="{ checkStrictly: true, label: 'title', value: 'name', emitPath: false }" :show-all-levels="false"
+              @change="changeSetting('defaultRouter', form.defaultRouter)" />
           </el-form-item>
 
           <el-form-item label="面包屑">
@@ -55,10 +58,13 @@
             </el-radio-group>
           </el-form-item>
 
-          <el-form-item label="默认路由">
-            <el-cascader v-model="form.defaultRouter" :options="menuOptions"
-              :props="{ checkStrictly: true, label: 'title', value: 'name', emitPath: false }" :show-all-levels="false"
-              filterable />
+          <el-form-item label="选中颜色">
+            <el-color-picker v-model="form.activeTextColor"
+              @change="changeSetting('activeTextColor', form.activeTextColor)" />
+          </el-form-item>
+          <el-form-item label="选中背景色">
+            <el-color-picker v-model="form.activeBackgroundColor"
+              @change="changeSetting('activeBackgroundColor', form.activeBackgroundColor)" />
           </el-form-item>
 
         </el-form>
@@ -79,7 +85,15 @@ import { getRoleMenuList } from '@/api/menu'
 const dictStore = useDictStore()
 const { lang_info } = storeToRefs(dictStore)
 const settingStore = useSettingStore()
-const { sideModeColor, breadcrumb, lang, collapse, defaultRouter, activeTextColor, activeBackgroundColor } = storeToRefs(settingStore)
+const {
+  lang,
+  collapse,
+  breadcrumb,
+  sideModeColor,
+  defaultRouter,
+  activeTextColor,
+  activeBackgroundColor
+} = storeToRefs(settingStore)
 
 const form = ref({
   lang: lang,
@@ -118,6 +132,7 @@ const getMenuOptions = async () => {
   }
 }
 const changeSetting = (name, val) => {
+  console.log(name, val)
   settingStore.updateSetting(name, val)
 }
 
@@ -125,14 +140,12 @@ const drawer = ref(false)
 const direction = ref('rtl')
 const handleClose = () => {
   drawer.value = false
+  window.location.reload()
 }
 const showSettingDrawer = () => {
   drawer.value = true
   getMenuOptions()
 }
-
-
-
 
 </script>
 
@@ -143,6 +156,7 @@ const showSettingDrawer = () => {
   align-items: center;
   justify-content: left;
 }
+
 
 .drawer-container {
   transition: all 0.2s;
@@ -165,7 +179,6 @@ const showSettingDrawer = () => {
   cursor: pointer;
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 10%);
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 10%);
-
 }
 
 .setting_body {
