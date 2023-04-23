@@ -25,3 +25,18 @@ export const captcha = () => {
 
 
 
+export const updateUserInfo = (data) => {
+  return service({
+    url: '/v1/update/userInfo',
+    method: 'post',
+    data: data
+  })
+}
+
+export const updatePassword = (data) => {
+  return service({
+    url: '/v1/udpate/password',
+    method: 'post',
+    data: data
+  })
+}

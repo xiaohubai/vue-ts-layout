@@ -8,6 +8,7 @@ export const useDictStore = defineStore('dict', {
             name: "",
             logo: ""
         },
+        state_info: {},
         lang_info: [],
         role_info: [],
         method_info: []

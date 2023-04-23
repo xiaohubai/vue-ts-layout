@@ -18,7 +18,6 @@ service.interceptors.request.use(
         return config
     },
     error => {
-        ElMessage({ showClose: true, message: error, type: 'error' })
         return error
     }
 )
@@ -26,9 +25,6 @@ service.interceptors.request.use(
 // http response 拦截器
 service.interceptors.response.use(
     response => {
-        if (response.data.code != 0) {
-            ElMessage({ showClose: true, message: response.data.msg, type: 'error' })
-        }
         return response.data
     },
     error => {
@@ -41,7 +37,7 @@ service.interceptors.response.use(
                 ElMessage({ showClose: true, message: "error 500", type: 'error' })
                 break
             case 404:
-                ElMessage({ showClose: true, message: "error 400", type: 'error' })
+                ElMessage({ showClose: true, message: "error 404", type: 'error' })
                 break
         }
         return error

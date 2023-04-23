@@ -8,7 +8,7 @@ import { useDictStore } from '@/pinia/modules/dict';
 
 export const useUserStore = defineStore('user', {
     state: () => ({
-        ID: '',
+        ID: 0,
         UID: '',
         userName: '',
         nickName: '',
@@ -19,7 +19,7 @@ export const useUserStore = defineStore('user', {
         phone: '',
         wechat: '',
         email: '',
-        state: '',
+        state: 0,
         motto: '',
         token: '',
         refreshToken: ''
