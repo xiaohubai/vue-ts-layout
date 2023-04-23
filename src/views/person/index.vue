@@ -136,7 +136,7 @@
 import { ref, reactive } from "vue"
 import { useUserStore } from '@/pinia/modules/user';
 import { useDictStore } from '@/pinia/modules/dict';
-import { updateUserInfo, updatePassword } from '@/api/user';
+import { updateUserInfo, updatePassword, getUserInfo } from '@/api/user';
 import { storeToRefs } from 'pinia';
 import { ElMessage } from 'element-plus'
 const userStore = useUserStore()
@@ -154,16 +154,21 @@ const {
   state
 } = storeToRefs(userStore)
 
+const { UID } = storeToRefs(userStore)
 const { state_info } = storeToRefs(dictStore)
 
 const dialogVisible = ref(false)
 const form = ref({
-  nickName: nickName,
-  motto: motto,
-  birth: birth,
-  phone: phone,
-  wechat: wechat,
-  email: email,
+  nickName: '',
+  motto: '',
+  birth: '',
+  phone: '',
+  wechat: '',
+  email: '',
+  userName: '',
+  avatar: '',
+  roleName: '',
+  state: 0
 })
 
 const upload = () => {
@@ -171,23 +176,23 @@ const upload = () => {
 }
 
 const pwdForm = ref({
+  UID: UID.value,
   oldPwd: '',
   newPwd: '',
   newPwdAgain: ''
-
 })
 const init = () => {
   pwdForm.value = {
+    UID: UID.value,
     oldPwd: '',
     newPwd: '',
     newPwdAgain: ''
   }
 }
 const rules = reactive({
-  oldPwd: [{ required: true, message: '必填', trigger: 'blur' }],
-  newPwd: [{ required: true, message: '必填', trigger: 'blur' }],
-  newPwdAgain: [{ required: true, message: '请输入确认密码', trigger: 'blur' },
-  { min: 6, message: '最少6个字符', trigger: 'blur' },
+  oldPwd: [{ required: true, message: '必填', trigger: 'blur' }, { min: 6, message: '最少6个字符', trigger: 'blur' }],
+  newPwd: [{ required: true, message: '必填', trigger: 'blur' }, { min: 6, message: '最少6个字符', trigger: 'blur' }],
+  newPwdAgain: [{ required: true, message: '请输入确认密码', trigger: 'blur' }, { min: 6, message: '最少6个字符', trigger: 'blur' },
   {
     validator: (rule, value, callback) => {
       if (value !== pwdForm.value.newPwd) {
@@ -197,31 +202,62 @@ const rules = reactive({
       }
     },
     trigger: 'blur',
-  },]
-
+  }]
 })
 
+const getData = async () => {
+  const res: any = await getUserInfo()
+  if (res.code === 0) {
+    form.value = {
+      nickName: res.data.nickName,
+      motto: res.data.motto,
+      birth: res.data.birth,
+      phone: res.data.phone,
+      wechat: res.data.wechat,
+      email: res.data.email,
+      userName: res.data.userName,
+      avatar: res.data.avatar,
+      roleName: res.data.roleName,
+      state: res.data.state,
+    }
+  } else {
+    ElMessage({ type: 'error', message: '获取用户失败' + res.msg })
+  }
+}
+
+getData()
 
 const onSubmit = async () => {
-  const res: any = await updateUserInfo(form)
+  const res: any = await updateUserInfo({
+    UID: UID.value,
+    nickName: form.value.nickName,
+    motto: form.value.motto,
+    birth: form.value.birth,
+    phone: form.value.phone,
+    wechat: form.value.wechat,
+    email: form.value.email,
+  })
   if (res.code === 0) {
+    userStore.setUserInfo(form.value)
     ElMessage({ type: 'success', message: '更新用户信息成功' })
   } else {
     ElMessage({ type: 'error', message: '更新用户信息失败' + res.msg })
   }
+  getData()
 }
 const submitDialog = async () => {
-  if (pwdForm.value.newPwd != pwdForm.value.newPwdAgain) {
-    ElMessage({ type: 'error', message: '密码不一致,重新输入' })
-    return
-  }
-  const res: any = await updatePassword(pwdForm)
+  const res: any = await updatePassword({
+    UID: pwdForm.value.UID,
+    oldPassword: pwdForm.value.oldPwd,
+    newPassword: pwdForm.value.newPwd,
+  })
   if (res.code === 0) {
     ElMessage({ type: 'success', message: '更新密码成功' })
+    dialogVisible.value = false
+    userStore.LoginOut()
   } else {
-    ElMessage({ type: 'error', message: '更新密码失败' + res.msg })
+    ElMessage({ type: 'error', message: res.msg })
   }
-  dialogVisible.value = false
 }
 
 const showDialog = () => {

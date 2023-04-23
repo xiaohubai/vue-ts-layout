@@ -35,8 +35,15 @@ export const updateUserInfo = (data) => {
 
 export const updatePassword = (data) => {
   return service({
-    url: '/v1/udpate/password',
+    url: '/v1/update/password',
     method: 'post',
     data: data
+  })
+}
+
+export const getUserInfo = () => {
+  return service({
+    url: '/v1/get/userInfo',
+    method: 'get'
   })
 }

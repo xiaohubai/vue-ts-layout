@@ -34,6 +34,9 @@ export const useUserStore = defineStore('user', {
             router.push({ name: 'login', replace: true })
             window.location.reload()
         },
+        setUserInfo(data: any) {
+            this.$state = data
+        },
         async LoginIn(data: any) {
             const res: any = await login(data)
             if (res.code === 0) {
