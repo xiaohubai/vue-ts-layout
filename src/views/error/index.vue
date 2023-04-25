@@ -9,14 +9,11 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Error'
+<script lang="ts" name="Error">
 
-}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped >
 .big {
   width: 100%;
   height: calc(100vh - 220px);
@@ -36,7 +33,7 @@ export default {
   font-size: 24px;
 }
 
-.inner .leftPic {
+.inner img {
   width: 60px;
   height: 60px;
   margin-left: 44%;

@@ -1,4 +1,3 @@
-import { resolve } from 'path';
 import { loadEnv } from 'vite';
 import { viteMockServe } from 'vite-plugin-mock';
 import vueSetupExtend from 'vite-plugin-vue-setup-extend-plus';
@@ -11,7 +10,7 @@ export default ({ command, mode }) => {
     root: './',
     resolve: {
       alias: {
-        '@': resolve(__dirname, './src'),
+        '@': __dirname + '/src',
         'vue$': 'vue/dist/vue.runtime.esm-bundler.js',
       }
     },

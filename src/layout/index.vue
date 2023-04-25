@@ -19,6 +19,7 @@
 </template>
 
 <script setup lang="ts" name="Layout">
+import { ref, watch } from 'vue'
 import Setting from '@/layout/components/setting/index.vue'
 import Aside from '@/layout/components/aside/index.vue'
 import Footer from '@/layout/components/footer/index.vue'
@@ -27,7 +28,18 @@ import { storeToRefs } from 'pinia'
 import { useSettingStore } from "@/pinia/modules/setting"
 
 const settingStore = useSettingStore()
-const { collapse } = storeToRefs(settingStore)
+const { collapse, breadcrumb } = storeToRefs(settingStore)
+
+const headerHeight = ref('60px')
+const getHeaderHeight = () => {
+    if (breadcrumb.value) {
+        headerHeight.value = '100px'
+    } else {
+        headerHeight.value = '60px'
+    }
+}
+
+watch(() => breadcrumb.value, () => { getHeaderHeight() }, { immediate: true, deep: true })
 
 </script>
 
@@ -50,12 +62,12 @@ const { collapse } = storeToRefs(settingStore)
     .el-header {
         margin: 0;
         padding: 0;
-        height: 100px;
+        height: v-bind(headerHeight);
         background: #fff;
     }
 
     .el-main {
-        height: calc(100% - 48px);
+        height: calc(100% - v-bind(headerHeight));
         margin: 14px 15px 20px 15px;
         padding: 0;
     }

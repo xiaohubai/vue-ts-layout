@@ -16,7 +16,7 @@
             </div>
         </div>
         <el-divider />
-        <div class="breadcrumb" v-if="breadcrumb === true">
+        <div class="breadcrumb" v-if="breadcrumb">
             <Breadcrumb />
         </div>
 

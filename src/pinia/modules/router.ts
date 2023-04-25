@@ -18,7 +18,7 @@ export const useRouterStore = defineStore('router', {
   getters: {
   },
   actions: {
-    async getRouter(roleID: string) {
+    async getRouter() {
       const res: any = await getRoleMenuList()
       if (res.code === 0) {
         const menus = res.data

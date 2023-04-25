@@ -19,13 +19,16 @@ router.beforeEach(async (to: any, from: any) => {
     const { defaultRouter } = storeToRefs(settingStore)
     const { token, roleID } = storeToRefs(userStore)
     to.meta.matched = [...to.matched]
-
+    // Check if the route is in the whitelist
     if (whiteList.includes(to.name)) {
+        // If the token exists
         if (token.value) {
+            // If the page is not refreshed
             if (!isRefresh) {
                 isRefresh = true
-                await routerStore.getRouter(roleID.value)
+                await routerStore.getRouter()
             }
+            // If the default router exists
             if (defaultRouter.value) {
                 return { name: defaultRouter.value }
             } else {
@@ -37,17 +40,15 @@ router.beforeEach(async (to: any, from: any) => {
         }
     } else {
         if (token.value) {
+            // If the page is not refreshed
             if (!isRefresh) {
-                await routerStore.getRouter(roleID.value)
+                await routerStore.getRouter()
                 isRefresh = true
-                if (token.value) {
-                    return { ...to, replace: true }
-                } else {
-                    return {
-                        name: 'login', query: { redirect: to.href }
-                    }
-                }
+
+                return { ...to, replace: true }
+
             } else {
+                // If the route is matched
                 if (to.matched.length) {
                     return true
                 } else {
@@ -55,6 +56,7 @@ router.beforeEach(async (to: any, from: any) => {
                 }
             }
         }
+        // If the token does not exist
         if (!token.value) {
             return { name: 'login', query: { redirect: document.location.hash } }
         }
