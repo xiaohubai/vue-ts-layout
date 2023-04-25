@@ -10,14 +10,11 @@
     <template v-if="menu.children.length">
       <template v-for="subitem in menu.children" :key="subitem.path">
         <template v-if="!subitem.children">
-          <el-menu-item v-if="!subitem.meta.hidden" :index="subitem.path"
-            :class="collapse ? 'collapse-sub-menu' : 'expand-sub-menu'" :key="subitem.path">
-
+          <el-menu-item v-if="!subitem.meta.hidden" :index="subitem.path" :key="subitem.path">
             <el-icon v-if="subitem.meta.icon">
               <component :is="subitem.meta.icon" />
             </el-icon>
             <span>{{ subitem.meta.title }}</span>
-
           </el-menu-item>
         </template>
         <!-- 二级+ 菜单 -->
@@ -42,10 +39,5 @@ const props = defineProps({
     type: Boolean
   }
 })
-
-
 </script>
-<style scoped lang="scss">
-
-
-</style>
+<style scoped lang="scss" ></style>

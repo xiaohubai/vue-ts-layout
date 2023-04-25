@@ -11,7 +11,6 @@ export const useSettingStore = defineStore('setting', {
         defaultRouter: '',//默认路由
         activeTextColor: '',//点击文本颜色
         activeBackgroundColor: '',//点击文本背景色
-        dropDownIcon: true, //下拉菜单
     }),
     persist: true,
     getters: {

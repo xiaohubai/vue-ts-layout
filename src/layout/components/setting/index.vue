@@ -1,37 +1,25 @@
 <template>
   <div>
     <el-affix>
-      <el-button type="primary" class="drawer-container" icon="Setting" @click="showSettingDrawer" />
+      <el-button type="primary" class="cls-setting-btn" icon="Setting" @click="showSettingDrawer" />
     </el-affix>
-    <el-drawer v-model="drawer" title="主题配置" :direction="direction" :before-close="handleClose">
-      <div class="setting_body">
-        <div class="setting_card">
-          <div class="setting_content">
-            <div class="theme-box">
-              <div class="item" @click="changeSetting('sideModeColor', 'light')">
-                <div class="item-top">
-                  <el-icon v-if="sideModeColor === 'light'" class="check">
-                    <check />
-                  </el-icon>
-                  <img src="@/assets/side_light.svg">
-                </div>
-                <p>简约白</p>
-              </div>
-              <div class="item" @click="changeSetting('sideModeColor', 'dark')">
-                <div class="item-top">
-                  <el-icon v-if="sideModeColor === 'dark'" class="check">
-                    <check />
-                  </el-icon>
-                  <img src="@/assets/side_dark.svg">
-                </div>
-                <p>商务黑</p>
-              </div>
-            </div>
-          </div>
+    <el-drawer v-model="isDrawer" title="主题配置" :direction="direction" :before-close="handleClose">
+      <div class="cls-setting-img">
+        <div class="cls-setting-img-click" @click="changeSetting('sideModeColor', '#ffffff')">
+          <el-icon class="check" v-if="sideModeColor === '#ffffff'">
+            <check />
+          </el-icon>
+          <img src="@/assets/side_light.svg">
+        </div>
+        <div class="cls-setting-img-click" @click="changeSetting('sideModeColor', '#000000')">
+          <el-icon class="check" v-if="sideModeColor === '#000000'">
+            <check />
+          </el-icon>
+          <img src="@/assets/side_dark.svg">
         </div>
       </div>
       <el-divider />
-      <div class="settingForm">
+      <div>
         <el-form model="form" label-position="left" label-width="auto" size="default">
           <el-form-item label="语言">
             <el-select v-model="form.lang" @change="changeSetting('lang', form.lang)">
@@ -66,7 +54,6 @@
             <el-color-picker v-model="form.activeBackgroundColor"
               @change="changeSetting('activeBackgroundColor', form.activeBackgroundColor)" />
           </el-form-item>
-
         </el-form>
       </div>
     </el-drawer>
@@ -132,33 +119,24 @@ const getMenuOptions = async () => {
   }
 }
 const changeSetting = (name, val) => {
-  console.log(name, val)
   settingStore.updateSetting(name, val)
 }
 
-const drawer = ref(false)
+const isDrawer = ref(false)
 const direction = ref('rtl')
 const handleClose = () => {
-  drawer.value = false
+  isDrawer.value = false
   window.location.reload()
 }
 const showSettingDrawer = () => {
-  drawer.value = true
+  isDrawer.value = true
   getMenuOptions()
 }
 
 </script>
 
 <style lang="scss" scoped>
-.settingForm {
-  display: flex;
-  margin-top: 14px;
-  align-items: center;
-  justify-content: left;
-}
-
-
-.drawer-container {
+.cls-setting-btn {
   transition: all 0.2s;
 
   &:hover {
@@ -181,52 +159,25 @@ const showSettingDrawer = () => {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 10%);
 }
 
-.setting_body {
-  padding: 20px;
+.cls-setting-img {
+  display: flex;
+  flex-direction: row;
 
-  .setting_card {
-    margin-bottom: 20px;
-  }
-
-  .setting_content {
-    margin-top: 20px;
+  .cls-setting-img-click {
     display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
+    margin-right: 14px;
 
-    >.theme-box {
-      display: flex;
-    }
-
-    >.color-box {
-      div {
-        display: flex;
-        flex-direction: column;
-      }
-    }
-
-    .item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .check {
+      position: absolute;
       flex-direction: column;
-      margin-right: 20px;
-
-      .item-top {
-        position: relative;
-      }
-
-      .check {
-        position: absolute;
-        font-size: 20px;
-        color: #00afff;
-        right: 10px;
-        bottom: 10px;
-      }
-
-      p {
-        text-align: center;
-        font-size: 12px;
-      }
+      font-size: 20px;
+      color: #00afff;
+      right: 10px;
+      bottom: 10px;
     }
   }
 }

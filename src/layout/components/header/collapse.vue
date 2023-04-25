@@ -1,5 +1,5 @@
 <template>
-  <el-icon class="xiaohu-collapse-icon" @click="changeCollapse">
+  <el-icon class="cls-collapse-icon" @click="changeCollapse">
     <component :is="collapse ? `DArrowRight` : `DArrowLeft`" />
   </el-icon>
 </template>
@@ -17,7 +17,7 @@ const changeCollapse = () => {
 </script>
 
 <style scoped lang="scss">
-.xiaohu-collapse-icon {
+.cls-collapse-icon {
   cursor: pointer;
   color: #413d3d;
 }

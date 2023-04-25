@@ -44,12 +44,10 @@ watch(() => breadcrumb.value, () => { getHeaderHeight() }, { immediate: true, de
 </script>
 
 <style  lang="scss" scoped>
+// 定义 el-container 样式
 .el-container {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    position: relative;
+    display: flex;
+    height: 100vh;
 
     ::-webkit-scrollbar {
         display: none;
@@ -60,22 +58,23 @@ watch(() => breadcrumb.value, () => { getHeaderHeight() }, { immediate: true, de
     }
 
     .el-header {
+        display: flex;
         margin: 0;
         padding: 0;
         height: v-bind(headerHeight);
-        background: #fff;
+        background: #ffffff;
+
     }
 
     .el-main {
         height: calc(100% - v-bind(headerHeight));
-        margin: 14px 15px 20px 15px;
-        padding: 0;
     }
 
     .el-footer {
         height: 30px;
-        line-height: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-
 }
 </style>

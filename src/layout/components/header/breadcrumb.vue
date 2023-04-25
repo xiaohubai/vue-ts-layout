@@ -16,7 +16,6 @@
 </template>
 
 <script setup lang="ts" name="Breadcrumb">
-import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia';
 import { useSettingStore } from '@/pinia/modules/setting';

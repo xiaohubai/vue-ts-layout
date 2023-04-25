@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="logo" :style="{ background: theme.backgroundColor }">
-      <img class="img" :src="app_info.logo">
-      <div v-if="!collapse" class="title" :style="{ color: sideModeColor == 'dark' ? '#fff' : '#191a23' }">{{
+    <div class="cls-logo" :style="{ background: theme.backgroundColor }">
+      <img class="cls-img" :src="app_info.logo">
+      <div v-if="!collapse" class="cls-title" :style="{ color: sideModeColor == '#000000' ? '#ffffff' : '#000000' }">{{
         app_info.name }}
       </div>
     </div>
@@ -19,7 +19,7 @@
                 <el-icon v-if="item.meta.icon">
                   <component :is="item.meta.icon" />
                 </el-icon>
-                <span :hidden="collapse ? true : false">{{ item.meta.title }}</span>
+                <span :hidden="collapse">{{ item.meta.title }}</span>
               </el-menu-item>
             </template>
             <!-- 二级+ 菜单 -->
@@ -60,19 +60,19 @@ const theme = ref({
 
 const getTheme = () => {
   switch (sideModeColor.value) {
-    case 'light':
+    case '#ffffff':
       theme.value = {
-        backgroundColor: '#fff',
-        textColor: '#191a23',
+        backgroundColor: '#ffffff', //背景色
+        textColor: '#000000', //前景色
         activeTextColor: activeTextColor.value,
         activeBackgroundColor: activeBackgroundColor.value,
       }
 
       break
-    case 'dark':
+    case '#000000':
       theme.value = {
-        backgroundColor: '#191a23',
-        textColor: '#fff',
+        backgroundColor: '#000000',
+        textColor: '#ffffff',
         activeTextColor: activeTextColor.value,
         activeBackgroundColor: activeBackgroundColor.value,
       }
@@ -104,7 +104,7 @@ watch(() => router.currentRoute.value, (item: any) => { AddActiveRouter(item) },
 </script>
 
 <style lang="scss" scoped>
-.logo {
+.cls-logo {
   min-height: 60px;
   line-height: 60px;
   text-align: center;
@@ -114,7 +114,7 @@ watch(() => router.currentRoute.value, (item: any) => { AddActiveRouter(item) },
   align-items: center;
   justify-content: center;
 
-  .img {
+  .cls-img {
     width: 30px;
     height: 30px;
     background: #fff;
@@ -122,7 +122,7 @@ watch(() => router.currentRoute.value, (item: any) => { AddActiveRouter(item) },
     padding: 3px;
   }
 
-  .title {
+  .cls-title {
     color: #fff;
     font-weight: 600;
     font-size: 20px;
@@ -131,6 +131,6 @@ watch(() => router.currentRoute.value, (item: any) => { AddActiveRouter(item) },
 }
 
 .el-menu {
-  border-right: none;
+  border: none;
 }
 </style>
