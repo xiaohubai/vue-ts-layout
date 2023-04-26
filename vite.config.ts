@@ -12,6 +12,7 @@ export default ({ command, mode }) => {
       alias: {
         '@': __dirname + '/src',
         'vue$': 'vue/dist/vue.runtime.esm-bundler.js',
+        'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js',
       }
     },
     server: {

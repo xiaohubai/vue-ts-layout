@@ -4,7 +4,7 @@ import { ElMessage } from 'element-plus'
 
 export const useSettingStore = defineStore('setting', {
     state: () => ({
-        lang: '',
+        lang: 'zh-cn',
         sideModeColor: 'dark',
         collapse: false, //侧边栏折叠
         breadcrumb: true,//面包屑

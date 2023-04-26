@@ -28,19 +28,15 @@
 
 <script setup lang="ts" name="Header">
 import Collapse from './collapse.vue'
-import TabBreadcrumb from './tab-breadcrumb.vue'
+import TabBreadcrumb from './tabs-breadcrumb.vue'
 import Breadcrumb from './breadcrumb.vue'
 import Profile from './profile.vue'
 import Notice from './notice.vue'
-import { useRouterStore } from '@/pinia/modules/router'
 import { storeToRefs } from 'pinia'
 import { useSettingStore } from "@/pinia/modules/setting"
 
-const routerStore = useRouterStore()
 const settingStore = useSettingStore()
-
 const { breadcrumb } = storeToRefs(settingStore)
-const { activeTitle } = storeToRefs(routerStore)
 </script>
 
 <style lang="scss" scoped>

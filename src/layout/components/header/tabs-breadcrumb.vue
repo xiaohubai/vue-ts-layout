@@ -1,11 +1,11 @@
 <template>
   <div class="cls-breadcrumb">
-    <el-tabs v-model="activeName" :closable="!(activeList.length === 1 && activeName === defaultRouter)" type="card"
+    <el-tabs v-model="activeRouteName" :closable="!(activeRouteHistoryList.length === 1 && activeRouteName === defaultRouter)" type="card"
       @tab-click="changeTab" @tab-remove="removeTab">
-      <el-tab-pane v-for="item in activeList" :key="item.path" :label="item.title" :name="item.name" :tab="item">
+      <el-tab-pane v-for="item in activeRouteHistoryList" :key="item.path" :label="item.title" :name="item.name" :tab="item">
         <template #label>
-          <span :tab="item" :style="{ color: activeName === item.name ? activeTextColor : '#333' }">
-            <i class="cls-dot" :style="{ backgroundColor: activeName === item.name ? activeTextColor : '#ddd' }" />
+          <span :tab="item" :style="{ color: activeRouteName === item.name ? activeTextColor : '#333' }">
+            <i class="cls-dot" :style="{ backgroundColor: activeRouteName === item.name ? activeTextColor : '#ddd' }" />
             {{ item.title }}
           </span>
         </template>
@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="TabBreadcrumb">
+<script setup lang="ts" name="TabsBreadcrumb">
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia';
 import { useSettingStore } from '@/pinia/modules/setting';
@@ -25,7 +25,7 @@ const settingStore = useSettingStore()
 const routerStore = useRouterStore()
 
 const { activeTextColor, defaultRouter } = storeToRefs(settingStore)
-const { activeList, activeName } = storeToRefs(routerStore)
+const { activeRouteHistoryList, activeRouteName } = storeToRefs(routerStore)
 
 const changeTab = (TabsPaneContext) => {
   const name = TabsPaneContext?.props?.name
@@ -34,21 +34,21 @@ const changeTab = (TabsPaneContext) => {
 }
 
 const removeTab = (tab) => {
-  const index = activeList.value.findIndex(
+  const index = activeRouteHistoryList.value.findIndex(
     (item) => item.name === tab
   )
-  if (activeName.value === tab) {
-    if (activeList.value.length === 1) {
+  if (activeRouteName.value === tab) {
+    if (activeRouteHistoryList.value.length === 1) {
       router.push({ name: defaultRouter.value })
     } else {
-      if (index < activeList.value.length - 1) {
-        router.push({ name: activeList.value[index + 1].name })
+      if (index < activeRouteHistoryList.value.length - 1) {
+        router.push({ name: activeRouteHistoryList.value[index + 1].name })
       } else {
-        router.push({ name: activeList.value[index - 1].name })
+        router.push({ name: activeRouteHistoryList.value[index - 1].name })
       }
     }
   }
-  activeList.value.splice(index, 1)
+  activeRouteHistoryList.value.splice(index, 1)
 }
 
 

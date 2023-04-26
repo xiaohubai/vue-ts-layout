@@ -1,14 +1,23 @@
 <template>
     <div>
-        <div class="cls-avatar">
-            <img class="cls-img" v-if="avatar" :src="avatar" :alt="nickName">
-            <span class="cls-text" v-if="nickName" style="font-size: 1px">
-                {{ nickName }}
-            </span>
-            <el-icon class="cls-icon" v-if="nickName">
-                <ArrowDown />
-            </el-icon>
-        </div>
+        <el-dropdown>
+            <div class="cls-avatar">
+                <img class="cls-img" v-if="avatar" :src="avatar" :alt="nickName">
+                <span class="cls-text" v-if="nickName" style="font-size: 1px">
+                    {{ nickName }}
+                </span>
+                <el-icon class="cls-icon" v-if="nickName">
+                    <ArrowDown />
+                </el-icon>
+            </div>
+            <template #dropdown>
+                <el-dropdown-menu>
+                    <el-dropdown-item icon="avatar">{{ roleName }}</el-dropdown-item>
+                    <el-dropdown-item icon="User" @click="toPerson">个人信息</el-dropdown-item>
+                    <el-dropdown-item icon="SwitchButton" @click="userStore.LoginOut">登 出</el-dropdown-item>
+                </el-dropdown-menu>
+            </template>
+        </el-dropdown>
     </div>
 </template>
 

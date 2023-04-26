@@ -8,10 +8,11 @@ import { asyncRouterHandle } from '@/utils/asyncRouter'
 export const useRouterStore = defineStore('router', {
   state: () => ({
     asyncRouters: [],
-    activeList: [],
-    activePath: '',
-    activeName: '',
-    activeTitle: '',
+    activeRouteHistoryList: [],
+    currentActiveRouteList: [],
+    activeRoutePath: '',
+    activeRouteName: '',
+    activeRouteTitle: '',
 
   }),
   persist: true,
