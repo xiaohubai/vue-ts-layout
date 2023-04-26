@@ -7,7 +7,7 @@
     <el-divider direction="vertical" />
     <span>Copyright</span>
     <span>
-      <a href="https://github.com/flipped-aurora">flipped-aurora团队</a>
+      <a href="https://github.com/flipped-aurora">{{ app_info.name }}</a>
     </span>
   </div>
 </template>
@@ -22,6 +22,7 @@ const { app_info } = storeToRefs(dictStore)
 a {
   color: #888;
 }
+
 span {
   margin: 0 3px;
 }

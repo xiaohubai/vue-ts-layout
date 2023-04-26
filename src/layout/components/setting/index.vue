@@ -6,13 +6,13 @@
     <el-drawer v-model="isDrawer" title="主题配置" :direction="direction" :before-close="handleClose">
       <div class="cls-setting-img">
         <div class="cls-setting-img-click" @click="changeSetting('sideModeColor', '#ffffff')">
-          <el-icon class="check" v-if="sideModeColor === '#ffffff'">
+          <el-icon class="cls-check" v-if="sideModeColor === '#ffffff'">
             <check />
           </el-icon>
           <img src="@/assets/side_light.svg">
         </div>
         <div class="cls-setting-img-click" @click="changeSetting('sideModeColor', '#000000')">
-          <el-icon class="check" v-if="sideModeColor === '#000000'">
+          <el-icon class="cls-check" v-if="sideModeColor === '#000000'">
             <check />
           </el-icon>
           <img src="@/assets/side_dark.svg">
@@ -171,7 +171,7 @@ const showSettingDrawer = () => {
     flex-direction: column;
     margin-right: 14px;
 
-    .check {
+    .cls-check {
       position: absolute;
       flex-direction: column;
       font-size: 20px;

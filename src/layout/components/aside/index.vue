@@ -36,12 +36,13 @@
 import { ref, watch } from 'vue'
 import Submenu from '@/layout/components/aside/submenu.vue'
 import { useRouterStore } from '@/pinia/modules/router';
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useSettingStore } from "@/pinia/modules/setting"
 import { useDictStore } from "@/pinia/modules/dict"
 
 const router = useRouter()
+const route = useRoute()
 const settingStore = useSettingStore()
 const routerStore = useRouterStore()
 const dictStore = useDictStore()
@@ -100,7 +101,6 @@ const AddActiveRouter = (item: any) => {
 
 watch(() => sideModeColor.value, () => { getTheme() }, { immediate: true, deep: true })
 watch(() => router.currentRoute.value, (item: any) => { AddActiveRouter(item) }, { immediate: true, deep: true })
-
 </script>
 
 <style lang="scss" scoped>

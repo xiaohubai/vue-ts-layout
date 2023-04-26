@@ -5,8 +5,8 @@
                 <div class="cls-collapse">
                     <Collapse />
                 </div>
-                <div class="cls-activeTitle">
-                    {{ activeTitle }}
+                <div class="cls-breadcrumb">
+                    <Breadcrumb />
                 </div>
             </div>
             <div class="cls-header-right">
@@ -21,13 +21,14 @@
         </div>
         <el-divider />
         <div class="cls-header-down" v-if="breadcrumb">
-            <Breadcrumb />
+            <TabBreadcrumb />
         </div>
     </div>
 </template>
 
 <script setup lang="ts" name="Header">
 import Collapse from './collapse.vue'
+import TabBreadcrumb from './tab-breadcrumb.vue'
 import Breadcrumb from './breadcrumb.vue'
 import Profile from './profile.vue'
 import Notice from './notice.vue'
@@ -66,8 +67,7 @@ const { activeTitle } = storeToRefs(routerStore)
             margin-left: 20px;
         }
 
-        .cls-activeTitle {
-            color: #413d3d;
+        .cls-breadcrumb {
             font-size: 16px;
             margin-left: 20px;
         }

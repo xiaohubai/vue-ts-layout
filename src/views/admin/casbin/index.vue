@@ -1,6 +1,6 @@
 <template>
   <el-card>
-    <div class="search-form">
+    <div class="cls-search-form">
       <el-form :inline="true" :model="searchForm">
         <el-form-item label="路径">
           <el-input v-model="searchForm.path" placeholder="路径" />
@@ -17,13 +17,13 @@
         </el-form-item>
       </el-form>
     </div>
-    <div class="btn-search-casbin">
+    <div class="cls-btn-search-casbin">
       <el-button type="primary" icon="search" @click="getTableData">查询</el-button>
       <el-button icon="refresh" @click="searchReset">重置</el-button>
     </div>
   </el-card>
-  <el-card class="casbin-card">
-    <div class="btn-add-casbin">
+  <el-card class="cls-casbin-card">
+    <div class="cls-btn-add-casbin">
       <el-button type="primary" icon="Plus" @click="addCasbin()">新增权限</el-button>
     </div>
     <el-table :data="tableData" border row-key="ID">
@@ -41,7 +41,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <div class="pagination">
+    <div class="cls-pagination">
       <el-pagination v-model:current-page="page" v-model:page-size="pageSize" :page-sizes="[10, 30, 50, 100]"
         :total="total" layout="total, sizes, prev, pager, next, jumper" @current-change="handleCurrentChange"
         @size-change="handleSizeChange" />
@@ -65,7 +65,7 @@
       </el-form-item>
     </el-form>
     <template #footer>
-      <div class="dialog-footer">
+      <div class="cls-dialog-footer">
         <el-button @click="closeDialog">取 消</el-button>
         <el-button type="primary" @click="submitDialog">确 定</el-button>
       </div>
@@ -238,27 +238,27 @@ const submitDialog = async () => {
 </script>
 
 <style lang="scss" scoped>
-.btn-add-casbin {
+.cls-btn-add-casbin {
   margin-bottom: 20px;
 }
 
-.search-form {
+.cls-search-form {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.casbin-card {
+.cls-casbin-card {
   margin-top: 14px;
 }
 
-.btn-search-casbin {
+.cls-btn-search-casbin {
   display: flex;
   justify-content: flex-end;
   margin-right: 14px;
 }
 
-.pagination {
+.cls-pagination {
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;

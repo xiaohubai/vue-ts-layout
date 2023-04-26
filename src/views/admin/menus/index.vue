@@ -1,6 +1,6 @@
 <template>
   <el-card>
-    <div class="btn-add-menu">
+    <div class="cls-btn-add-menu">
       <el-button type="primary" icon="Plus" @click="addMenu(1)">新增根菜单</el-button>
     </div>
     <el-table :data="tableData" :default-sort="{ prop: 'sort', order: 'asc' }" border row-key="ID">
@@ -13,7 +13,7 @@
       <el-table-column align="left" label="path" show-overflow-tooltip min-width="160" prop="path" />
       <el-table-column align="left" label="图标" min-width="140" prop="icon">
         <template #default="scope: any">
-          <div v-if=" scope.row.icon " class="icon-column">
+          <div v-if=" scope.row.icon " class="cls-icon-column">
             <el-icon>
               <component :is=" scope.row.icon " />
             </el-icon>
@@ -76,7 +76,7 @@
       </el-form-item>
     </el-form>
     <template #footer>
-      <div class="dialog-footer">
+      <div class="cls-dialog-footer">
         <el-button @click=" closeDialogByBtn ">取 消</el-button>
         <el-button type="primary" @click=" submitDialogbyBtn ">确 定</el-button>
       </div>
@@ -270,11 +270,11 @@ const closeDialogByBtn = () => {
 </script>
 
 <style lang="scss" scoped>
-.btn-add-menu {
+.cls-btn-add-menu {
   margin-bottom: 20px;
 }
 
-.icon-column {
+.cls-icon-column {
   display: flex;
   align-items: center;
 
@@ -283,7 +283,7 @@ const closeDialogByBtn = () => {
   }
 }
 
-.pagination {
+.cls-pagination {
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
