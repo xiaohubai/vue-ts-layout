@@ -2,7 +2,9 @@
   <div>
     <el-breadcrumb>
       <template v-for="item in currentActiveRouteList" :key="item.path">
-        <el-breadcrumb-item :to="{ path: item.path }">{{ item.title }}</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: item.path }">
+          {{ item.title }}
+        </el-breadcrumb-item>
       </template>
     </el-breadcrumb>
   </div>
@@ -10,7 +12,7 @@
 
 <script setup lang="ts" name="Breadcrumb">
 import { storeToRefs } from 'pinia'
-import { useRouterStore } from '@/pinia/modules/router';
+import { useRouterStore } from '@/pinia/modules/router'
 const routerStore = useRouterStore()
 const { currentActiveRouteList } = storeToRefs(routerStore)
 

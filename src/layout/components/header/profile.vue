@@ -1,31 +1,36 @@
 <template>
-    <div>
-        <el-dropdown>
-            <div class="cls-avatar">
-                <img class="cls-img" v-if="avatar" :src="avatar" :alt="nickName">
-                <span class="cls-text" v-if="nickName" style="font-size: 1px">
-                    {{ nickName }}
-                </span>
-                <el-icon class="cls-icon" v-if="nickName">
-                    <ArrowDown />
-                </el-icon>
-            </div>
-            <template #dropdown>
-                <el-dropdown-menu>
-                    <el-dropdown-item icon="avatar">{{ roleName }}</el-dropdown-item>
-                    <el-dropdown-item icon="User" @click="toPerson">个人信息</el-dropdown-item>
-                    <el-dropdown-item icon="SwitchButton" @click="userStore.LoginOut">登 出</el-dropdown-item>
-                </el-dropdown-menu>
-            </template>
-        </el-dropdown>
-    </div>
+  <div>
+    <el-dropdown>
+      <div class="cls-avatar">
+        <img v-if="avatar" class="cls-img" :src="avatar" :alt="nickName">
+        <span v-if="nickName" class="cls-text" style="font-size: 1px">
+          {{ nickName }}
+        </span>
+        <el-icon v-if="nickName" class="cls-icon">
+          <ArrowDown />
+        </el-icon>
+      </div>
+      <template #dropdown>
+        <el-dropdown-menu>
+          <el-dropdown-item icon="avatar">
+            {{ roleName }}
+          </el-dropdown-item>
+          <el-dropdown-item icon="User" @click="toPerson">
+            个人信息
+          </el-dropdown-item>
+          <el-dropdown-item icon="SwitchButton" @click="userStore.LoginOut">
+            登 出
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </template>
+    </el-dropdown>
+  </div>
 </template>
-
 
 <script setup lang="ts" name="Perfile">
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import { useUserStore } from '@/pinia/modules/user';
+import { useUserStore } from '@/pinia/modules/user'
 const router = useRouter()
 const userStore = useUserStore()
 const { nickName, avatar, roleName } = storeToRefs(userStore)

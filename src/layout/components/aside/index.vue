@@ -2,20 +2,21 @@
   <div class="cls-aside" :style="{ background: theme.backgroundColor }">
     <div class="cls-logo">
       <img class="cls-img" :src="app_info.logo">
-      <div v-if="!collapse" class="cls-title" :style="{ color: sideModeColor == '#000000' ? '#ffffff' : '#000000' }">{{
-        app_info.name }}
+      <div v-if="!collapse" class="cls-title" :style="{ color: sideModeColor == '#000000' ? '#ffffff' : '#000000' }">
+        {{
+          app_info.name }}
       </div>
     </div>
 
     <div class="cls-menu">
       <el-scrollbar style="height: calc(100vh - 60px)">
         <el-menu :default-active="activeRoutePath" :collapse="collapse" :collapse-transition="false"
-          :text-color="theme.textColor" :background-color="theme.backgroundColor"
-          :active-text-color="theme.activeTextColor" :router="true" :unique-opened="true">
+                 :text-color="theme.textColor" :background-color="theme.backgroundColor"
+                 :active-text-color="theme.activeTextColor" :router="true" :unique-opened="true">
           <template v-for="item in asyncRouters[0].children" :key="item.path">
             <!-- 一级菜单 -->
             <template v-if="!(item.children && item.children.length)">
-              <el-menu-item v-if="!item.meta.hidden" :index="item.path" :key="item.path">
+              <el-menu-item v-if="!item.meta.hidden" :key="item.path" :index="item.path">
                 <el-icon v-if="item.meta.icon">
                   <component :is="item.meta.icon" />
                 </el-icon>
@@ -31,21 +32,19 @@
   </div>
 </template>
 
-
 <script setup lang="ts"  name="Aside">
 import { ref, watch } from 'vue'
 import Submenu from '@/layout/components/aside/submenu.vue'
-import { useRouterStore } from '@/pinia/modules/router';
+import { useRouterStore } from '@/pinia/modules/router'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import { useSettingStore } from "@/pinia/modules/setting"
-import { useDictStore } from "@/pinia/modules/dict"
+import { useSettingStore } from '@/pinia/modules/setting'
+import { useDictStore } from '@/pinia/modules/dict'
 
 const router = useRouter()
 const settingStore = useSettingStore()
 const routerStore = useRouterStore()
 const dictStore = useDictStore()
-
 
 const {
   asyncRouters,
@@ -62,7 +61,7 @@ const theme = ref({
   backgroundColor: '',
   textColor: '',
   activeTextColor: activeTextColor.value,
-  activeBackgroundColor: activeBackgroundColor.value,
+  activeBackgroundColor: activeBackgroundColor.value
 })
 
 const getTheme = () => {
@@ -72,7 +71,7 @@ const getTheme = () => {
         backgroundColor: '#ffffff', //背景色
         textColor: '#000000', //前景色
         activeTextColor: activeTextColor.value,
-        activeBackgroundColor: activeBackgroundColor.value,
+        activeBackgroundColor: activeBackgroundColor.value
       }
 
       break
@@ -81,13 +80,11 @@ const getTheme = () => {
         backgroundColor: '#000000',
         textColor: '#ffffff',
         activeTextColor: activeTextColor.value,
-        activeBackgroundColor: activeBackgroundColor.value,
+        activeBackgroundColor: activeBackgroundColor.value
       }
       break
   }
 }
-
-
 
 const AddCurrentRouteToPinia = (route: any) => {
   //当前活跃路由
@@ -102,7 +99,7 @@ const AddCurrentRouteToPinia = (route: any) => {
   if (length >= 1) {
     Object.values(matched).forEach((item: any) => {
       if (item.path && item.path !== '/layout') {
-        let data: any = {
+        const data: any = {
           path: item.path,
           name: item.name,
           title: item.meta.title
@@ -165,7 +162,6 @@ watch(() => router.currentRoute.value, (route: any) => { AddCurrentRouteToPinia(
     width: 100%;
   }
 }
-
 
 .el-menu {
   border: none;

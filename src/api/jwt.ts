@@ -7,5 +7,3 @@ export const jsonInBlacklist = (data) => {
     })
 }
 
-
-

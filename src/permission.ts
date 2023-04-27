@@ -1,23 +1,21 @@
-import { storeToRefs } from 'pinia';
-import router from '@/router';
-import { useRouterStore } from '@/pinia/modules/router';
-import { useSettingStore } from '@/pinia/modules/setting';
-import { useUserStore } from '@/pinia/modules/user';
-
-import getPageTitle from '@/utils/pageTitle';
+import { storeToRefs } from 'pinia'
+import router from '@/router'
+import { useRouterStore } from '@/pinia/modules/router'
+import { useSettingStore } from '@/pinia/modules/setting'
+import { useUserStore } from '@/pinia/modules/user'
+import getPageTitle from '@/utils/pageTitle'
 
 const whiteList = ['login']
+let isRefresh = false
 
-let isRefresh = false;
-
-router.beforeEach(async (to: any, from: any) => {
+router.beforeEach(async (to: any ) => {
     document.title = getPageTitle(to.meta.title)
     const settingStore = useSettingStore()
     const routerStore = useRouterStore()
     const userStore = useUserStore()
 
     const { defaultRouter } = storeToRefs(settingStore)
-    const { token, roleID } = storeToRefs(userStore)
+    const { token } = storeToRefs(userStore)
     to.meta.matched = [...to.matched]
     // Check if the route is in the whitelist
     if (whiteList.includes(to.name)) {
@@ -44,9 +42,7 @@ router.beforeEach(async (to: any, from: any) => {
             if (!isRefresh) {
                 await routerStore.getRouter()
                 isRefresh = true
-
                 return { ...to, replace: true }
-
             } else {
                 // If the route is matched
                 if (to.matched.length) {

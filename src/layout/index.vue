@@ -1,21 +1,21 @@
 <template>
+  <el-container>
+    <el-aside :width="collapse ? '60px' : '220px'">
+      <Aside />
+    </el-aside>
     <el-container>
-        <el-aside :width="collapse ? '60px' : '220px'">
-            <Aside />
-        </el-aside>
-        <el-container>
-            <el-header>
-                <Header />
-            </el-header>
-            <el-main>
-                <router-view />
-            </el-main>
-            <el-footer>
-                <Footer />
-            </el-footer>
-            <Setting />
-        </el-container>
+      <el-header>
+        <Header />
+      </el-header>
+      <el-main>
+        <router-view />
+      </el-main>
+      <el-footer>
+        <Footer />
+      </el-footer>
+      <Setting />
     </el-container>
+  </el-container>
 </template>
 
 <script setup lang="ts" name="Layout">
@@ -25,7 +25,7 @@ import Aside from '@/layout/components/aside/index.vue'
 import Footer from '@/layout/components/footer/index.vue'
 import Header from '@/layout/components/header/index.vue'
 import { storeToRefs } from 'pinia'
-import { useSettingStore } from "@/pinia/modules/setting"
+import { useSettingStore } from '@/pinia/modules/setting'
 
 const settingStore = useSettingStore()
 const { collapse, breadcrumb } = storeToRefs(settingStore)
@@ -56,14 +56,12 @@ watch(() => breadcrumb.value, () => { getHeaderHeight() }, { immediate: true, de
     .el-aside {
         overflow: hidden;
     }
-
     .el-header {
         display: flex;
         margin: 0;
         padding: 0;
         height: v-bind(headerHeight);
         background: #ffffff;
-
     }
 
     .el-main {

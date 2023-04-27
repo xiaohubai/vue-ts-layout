@@ -6,7 +6,7 @@
 
 <script setup lang="ts" name="Collapse">
 import { storeToRefs } from 'pinia'
-import { useSettingStore } from "@/pinia/modules/setting"
+import { useSettingStore } from '@/pinia/modules/setting'
 
 const settingStore = useSettingStore()
 const { collapse } = storeToRefs(settingStore)

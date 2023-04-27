@@ -23,8 +23,6 @@ export const captcha = () => {
   })
 }
 
-
-
 export const updateUserInfo = (data) => {
   return service({
     url: '/v1/update/userInfo',

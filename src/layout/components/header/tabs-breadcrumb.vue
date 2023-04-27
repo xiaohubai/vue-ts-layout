@@ -1,7 +1,8 @@
 <template>
   <div class="cls-breadcrumb">
-    <el-tabs v-model="activeRouteName" :closable="!(activeRouteHistoryList.length === 1 && activeRouteName === defaultRouter)" type="card"
-      @tab-click="changeTab" @tab-remove="removeTab">
+    <el-tabs v-model="activeRouteName" type="card"
+             :closable="!(activeRouteHistoryList.length === 1 && activeRouteName === defaultRouter)"
+             @tab-click="changeTab" @tab-remove="removeTab">
       <el-tab-pane v-for="item in activeRouteHistoryList" :key="item.path" :label="item.title" :name="item.name" :tab="item">
         <template #label>
           <span :tab="item" :style="{ color: activeRouteName === item.name ? activeTextColor : '#333' }">
@@ -11,15 +12,14 @@
         </template>
       </el-tab-pane>
     </el-tabs>
-
   </div>
 </template>
 
 <script setup lang="ts" name="TabsBreadcrumb">
 import { useRouter } from 'vue-router'
-import { storeToRefs } from 'pinia';
-import { useSettingStore } from '@/pinia/modules/setting';
-import { useRouterStore } from '@/pinia/modules/router';
+import { storeToRefs } from 'pinia'
+import { useSettingStore } from '@/pinia/modules/setting'
+import { useRouterStore } from '@/pinia/modules/router'
 const router = useRouter()
 const settingStore = useSettingStore()
 const routerStore = useRouterStore()
@@ -51,14 +51,12 @@ const removeTab = (tab) => {
   activeRouteHistoryList.value.splice(index, 1)
 }
 
-
 </script>
 
 <style scoped lang="scss">
 .cls-breadcrumb {
   background-color: #fff;
 }
-
 
 .el-tabs__item .cls-dot {
   content: "";

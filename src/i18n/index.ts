@@ -24,6 +24,4 @@ const i18n = createI18n({
 	messages
 })
 
-
-
 export default i18n

@@ -10,7 +10,7 @@ export const useSettingStore = defineStore('setting', {
         breadcrumb: true,//面包屑
         defaultRouter: '',//默认路由
         activeTextColor: '',//点击文本颜色
-        activeBackgroundColor: '',//点击文本背景色
+        activeBackgroundColor: ''//点击文本背景色
     }),
     persist: true,
     getters: {
@@ -27,13 +27,13 @@ export const useSettingStore = defineStore('setting', {
         },
         async updateSetting(name: any, val: any) {
             const data = {
-                "lang": this.$state.lang,
-                "sideModeColor": this.$state.sideModeColor,
-                "collapse": this.$state.collapse,
-                "breadcrumb": this.$state.breadcrumb,
-                "defaultRouter": this.$state.defaultRouter,
-                "activeTextColor": this.$state.activeTextColor,
-                "activeBackgroundColor": this.$state.activeBackgroundColor
+                'lang': this.$state.lang,
+                'sideModeColor': this.$state.sideModeColor,
+                'collapse': this.$state.collapse,
+                'breadcrumb': this.$state.breadcrumb,
+                'defaultRouter': this.$state.defaultRouter,
+                'activeTextColor': this.$state.activeTextColor,
+                'activeBackgroundColor': this.$state.activeBackgroundColor
             }
             data[name] = val
             const res: any = await updateSetting(data)

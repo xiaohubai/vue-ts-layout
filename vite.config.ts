@@ -1,9 +1,9 @@
-import { loadEnv } from 'vite';
-import { viteMockServe } from 'vite-plugin-mock';
-import vueSetupExtend from 'vite-plugin-vue-setup-extend-plus';
-import vue from '@vitejs/plugin-vue';
+import { loadEnv } from 'vite'
+import { viteMockServe } from 'vite-plugin-mock'
+import vueSetupExtend from 'vite-plugin-vue-setup-extend-plus'
+import vue from '@vitejs/plugin-vue'
 
-export default ({ command, mode }) => {
+export default ({ mode }) => {
   const env = loadEnv(mode, process.cwd())
   return {
     base: './',
@@ -12,7 +12,7 @@ export default ({ command, mode }) => {
       alias: {
         '@': __dirname + '/src',
         'vue$': 'vue/dist/vue.runtime.esm-bundler.js',
-        'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js',
+        'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js'
       }
     },
     server: {
@@ -30,7 +30,7 @@ export default ({ command, mode }) => {
       minify: 'terser',// 是否进行压缩
       manifest: false, // 是否产出maifest.json
       sourcemap: false, // 是否产出soucemap.json
-      outDir: 'dist', // 产出目录
+      outDir: 'dist' // 产出目录
     },
 
     plugins: [

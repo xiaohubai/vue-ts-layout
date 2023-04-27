@@ -1,16 +1,15 @@
 <template>
-  <el-sub-menu :index="menu.path" :key="menu.path">
+  <el-sub-menu :key="menu.path" :index="menu.path">
     <template #title>
       <el-icon v-if="menu.meta.icon">
         <component :is="menu.meta.icon" />
       </el-icon>
       <span :hidden="collapse ? true : false">{{ menu.meta.title }}</span>
-
     </template>
     <template v-if="menu.children.length">
       <template v-for="subitem in menu.children" :key="subitem.path">
         <template v-if="!subitem.children">
-          <el-menu-item v-if="!subitem.meta.hidden" :index="subitem.path" :key="subitem.path">
+          <el-menu-item v-if="!subitem.meta.hidden" :key="subitem.path" :index="subitem.path">
             <el-icon v-if="subitem.meta.icon">
               <component :is="subitem.meta.icon" />
             </el-icon>
@@ -24,8 +23,7 @@
   </el-sub-menu>
 </template>
 <script setup lang="ts" name="Submenu">
-
-const props = defineProps({
+ defineProps({
   menu: {
     type: Object,
     default: () => ({})
@@ -40,4 +38,4 @@ const props = defineProps({
   }
 })
 </script>
-<style scoped lang="scss" ></style>
+<style scoped lang="scss"></style>

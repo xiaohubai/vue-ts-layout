@@ -1,29 +1,28 @@
 <template>
-    <div class="cls-header">
-        <div class="cls-header-up">
-            <div class="cls-header-left">
-                <div class="cls-collapse">
-                    <Collapse />
-                </div>
-                <div class="cls-breadcrumb">
-                    <Breadcrumb />
-                </div>
-            </div>
-            <div class="cls-header-right">
-                <div class="cls-notice">
-                    <Notice />
-                </div>
-                <div class="cls-profile">
-                    <Profile />
-                </div>
-
-            </div>
+  <div class="cls-header">
+    <div class="cls-header-up">
+      <div class="cls-header-left">
+        <div class="cls-collapse">
+          <Collapse />
         </div>
-        <el-divider />
-        <div class="cls-header-down" v-if="breadcrumb">
-            <TabBreadcrumb />
+        <div class="cls-breadcrumb">
+          <Breadcrumb />
         </div>
+      </div>
+      <div class="cls-header-right">
+        <div class="cls-notice">
+          <Notice />
+        </div>
+        <div class="cls-profile">
+          <Profile />
+        </div>
+      </div>
     </div>
+    <el-divider />
+    <div v-if="breadcrumb" class="cls-header-down">
+      <TabBreadcrumb />
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts" name="Header">
@@ -33,7 +32,7 @@ import Breadcrumb from './breadcrumb.vue'
 import Profile from './profile.vue'
 import Notice from './notice.vue'
 import { storeToRefs } from 'pinia'
-import { useSettingStore } from "@/pinia/modules/setting"
+import { useSettingStore } from '@/pinia/modules/setting'
 
 const settingStore = useSettingStore()
 const { breadcrumb } = storeToRefs(settingStore)

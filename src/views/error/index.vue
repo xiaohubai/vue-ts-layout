@@ -9,11 +9,11 @@
   </div>
 </template>
 
-<script lang="ts" name="Error">
+<script setup lang="ts" name="Error">
 
 </script>
 
-<style lang="scss" scoped >
+<style lang="scss" scoped>
 .big {
   width: 100%;
   height: calc(100vh - 220px);

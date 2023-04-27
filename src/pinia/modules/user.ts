@@ -1,10 +1,10 @@
-import { ElMessage } from 'element-plus';
-import { defineStore } from 'pinia';
-import router from '@/router';
-import { login } from '@/api/user';
-import { useRouterStore } from '@/pinia/modules/router';
-import { useSettingStore } from '@/pinia/modules/setting';
-import { useDictStore } from '@/pinia/modules/dict';
+import { ElMessage } from 'element-plus'
+import { defineStore } from 'pinia'
+import router from '@/router'
+import { login } from '@/api/user'
+import { useRouterStore } from '@/pinia/modules/router'
+import { useSettingStore } from '@/pinia/modules/setting'
+import { useDictStore } from '@/pinia/modules/dict'
 
 export const useUserStore = defineStore('user', {
     state: () => ({
@@ -51,7 +51,7 @@ export const useUserStore = defineStore('user', {
 
                 //获取动态路由配置
                 const routerStore = useRouterStore()
-                await routerStore.getRouter(this.$state.roleID)
+                await routerStore.getRouter()
 
                 await router.replace({ name: settingStore.defaultRouter })
                 return true

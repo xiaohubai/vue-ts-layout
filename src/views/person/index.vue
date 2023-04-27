@@ -3,7 +3,7 @@
     <el-col :span="8">
       <el-card class="show-card">
         <div class="show-avatar"
-          :style="{ 'background-image': `url(${avatar})`, 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
+             :style="{ 'background-image': `url(${avatar})`, 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
           <span class="update" @click="upload">
             <el-icon>
               <edit />
@@ -14,7 +14,9 @@
         <div class="show-desc">
           <span class="show-desc-nickName">{{ nickName }} </span>
           <span class="show-desc-roleName">({{ roleName }})</span>
-          <p class="show-desc-msg">{{ motto }}</p>
+          <p class="show-desc-msg">
+            {{ motto }}
+          </p>
         </div>
         <div class="show-userInfo">
           <el-tabs tab-position="left">
@@ -68,8 +70,8 @@
                 </el-text>
               </div>
             </el-tab-pane>
-            <el-tab-pane label="事件"></el-tab-pane>
-            <el-tab-pane label="标签"></el-tab-pane>
+            <el-tab-pane label="事件" />
+            <el-tab-pane label="标签" />
           </el-tabs>
         </div>
       </el-card>
@@ -89,7 +91,9 @@
               <el-input v-model="form.phone" />
             </el-form-item>
             <el-form-item label="密码">
-              <el-button type="primary" plain @click="showDialog">修改密码</el-button>
+              <el-button type="primary" plain @click="showDialog">
+                修改密码
+              </el-button>
             </el-form-item>
 
             <el-form-item label="微信" style="width:45%">
@@ -102,11 +106,12 @@
               <el-input v-model="form.motto" type="textarea" />
             </el-form-item>
             <div class="onSubmitBtn">
-              <el-button type="primary" @click="onSubmit">确 认</el-button>
+              <el-button type="primary" @click="onSubmit">
+                确 认
+              </el-button>
             </div>
           </el-form>
         </div>
-
       </el-card>
     </el-col>
   </el-row>
@@ -124,20 +129,23 @@
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="closeDialog">取 消</el-button>
-        <el-button type="primary" @click="submitDialog">确 定</el-button>
+        <el-button @click="closeDialog">
+          取 消
+        </el-button>
+        <el-button type="primary" @click="submitDialog">
+          确 定
+        </el-button>
       </div>
     </template>
   </el-dialog>
 </template>
 
-
 <script setup lang="ts" name="Person">
-import { ref, reactive } from "vue"
-import { useUserStore } from '@/pinia/modules/user';
-import { useDictStore } from '@/pinia/modules/dict';
-import { updateUserInfo, updatePassword, getUserInfo } from '@/api/user';
-import { storeToRefs } from 'pinia';
+import { ref, reactive } from 'vue'
+import { useUserStore } from '@/pinia/modules/user'
+import { useDictStore } from '@/pinia/modules/dict'
+import { updateUserInfo, updatePassword, getUserInfo } from '@/api/user'
+import { storeToRefs } from 'pinia'
 import { ElMessage } from 'element-plus'
 const userStore = useUserStore()
 const dictStore = useDictStore()
@@ -201,7 +209,7 @@ const rules = reactive({
         callback()
       }
     },
-    trigger: 'blur',
+    trigger: 'blur'
   }]
 })
 
@@ -218,7 +226,7 @@ const getData = async () => {
       userName: res.data.userName,
       avatar: res.data.avatar,
       roleName: res.data.roleName,
-      state: res.data.state,
+      state: res.data.state
     }
   } else {
     ElMessage({ type: 'error', message: '获取用户失败' + res.msg })
@@ -235,7 +243,7 @@ const onSubmit = async () => {
     birth: form.value.birth,
     phone: form.value.phone,
     wechat: form.value.wechat,
-    email: form.value.email,
+    email: form.value.email
   })
   if (res.code === 0) {
     userStore.setUserInfo(form.value)
@@ -249,7 +257,7 @@ const submitDialog = async () => {
   const res: any = await updatePassword({
     UID: pwdForm.value.UID,
     oldPassword: pwdForm.value.oldPwd,
-    newPassword: pwdForm.value.newPwd,
+    newPassword: pwdForm.value.newPwd
   })
   if (res.code === 0) {
     ElMessage({ type: 'success', message: '更新密码成功' })
@@ -272,7 +280,6 @@ const handleClose = (done) => {
 const closeDialog = () => {
   dialogVisible.value = false
 }
-
 
 </script>
 
@@ -333,8 +340,6 @@ const closeDialog = () => {
     color: #999;
   }
 }
-
-
 
 .show-userInfo {
   margin-top: 30px;

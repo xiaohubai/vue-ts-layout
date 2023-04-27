@@ -6,13 +6,13 @@
     <el-drawer v-model="isDrawer" title="主题配置" :direction="direction" :before-close="handleClose">
       <div class="cls-setting-img">
         <div class="cls-setting-img-click" @click="changeSetting('sideModeColor', '#ffffff')">
-          <el-icon class="cls-check" v-if="sideModeColor === '#ffffff'">
+          <el-icon v-if="sideModeColor === '#ffffff'" class="cls-check">
             <check />
           </el-icon>
           <img src="@/assets/side_light.svg">
         </div>
         <div class="cls-setting-img-click" @click="changeSetting('sideModeColor', '#000000')">
-          <el-icon class="cls-check" v-if="sideModeColor === '#000000'">
+          <el-icon v-if="sideModeColor === '#000000'" class="cls-check">
             <check />
           </el-icon>
           <img src="@/assets/side_dark.svg">
@@ -28,31 +28,39 @@
           </el-form-item>
           <el-form-item label="默认路由">
             <el-cascader v-model="form.defaultRouter" :options="menuOptions"
-              :props="{ checkStrictly: true, label: 'title', value: 'name', emitPath: false }" :show-all-levels="false"
-              @change="changeSetting('defaultRouter', form.defaultRouter)" />
+                         :props="{ checkStrictly: true, label: 'title', value: 'name', emitPath: false }" :show-all-levels="false"
+                         @change="changeSetting('defaultRouter', form.defaultRouter)" />
           </el-form-item>
 
           <el-form-item label="面包屑">
             <el-radio-group v-model="form.breadcrumb" @change="changeSetting('breadcrumb', form.breadcrumb)">
-              <el-radio-button :label=true>开启</el-radio-button>
-              <el-radio-button :label=false>关闭</el-radio-button>
+              <el-radio-button :label="true">
+                开启
+              </el-radio-button>
+              <el-radio-button :label="false">
+                关闭
+              </el-radio-button>
             </el-radio-group>
           </el-form-item>
 
           <el-form-item label="侧边栏折叠">
             <el-radio-group v-model="form.collapse" @change="changeSetting('collapse', form.collapse)">
-              <el-radio-button :label=true>开启</el-radio-button>
-              <el-radio-button :label=false>关闭</el-radio-button>
+              <el-radio-button :label="true">
+                开启
+              </el-radio-button>
+              <el-radio-button :label="false">
+                关闭
+              </el-radio-button>
             </el-radio-group>
           </el-form-item>
 
           <el-form-item label="选中颜色">
             <el-color-picker v-model="form.activeTextColor"
-              @change="changeSetting('activeTextColor', form.activeTextColor)" />
+                             @change="changeSetting('activeTextColor', form.activeTextColor)" />
           </el-form-item>
           <el-form-item label="选中背景色">
             <el-color-picker v-model="form.activeBackgroundColor"
-              @change="changeSetting('activeBackgroundColor', form.activeBackgroundColor)" />
+                             @change="changeSetting('activeBackgroundColor', form.activeBackgroundColor)" />
           </el-form-item>
         </el-form>
       </div>
@@ -60,13 +68,11 @@
   </div>
 </template>
 
-
-
 <script setup lang="ts" name="Setting">
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useSettingStore } from "@/pinia/modules/setting"
-import { useDictStore } from '@/pinia/modules/dict';
+import { useSettingStore } from '@/pinia/modules/setting'
+import { useDictStore } from '@/pinia/modules/dict'
 import { getRoleMenuList } from '@/api/menu'
 
 const dictStore = useDictStore()
@@ -97,7 +103,7 @@ const menuListFormat = (menuOptions, list) => {
     if (item.meta.hidden) {
       return
     }
-    let oData = {
+    const oData = {
       name: item.name,
       title: item.meta.title,
       children: []

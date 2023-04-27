@@ -13,8 +13,8 @@
 </template>
 
 <script setup lang="ts" name="Footer">
-import { useDictStore } from '@/pinia/modules/dict';
-import { storeToRefs } from 'pinia';
+import { useDictStore } from '@/pinia/modules/dict'
+import { storeToRefs } from 'pinia'
 const dictStore = useDictStore()
 const { app_info } = storeToRefs(dictStore)
 </script>

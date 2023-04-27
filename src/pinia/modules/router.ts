@@ -4,7 +4,6 @@ import { getRoleMenuList } from '@/api/menu'
 import { ElMessage } from 'element-plus'
 import { asyncRouterHandle } from '@/utils/asyncRouter'
 
-
 export const useRouterStore = defineStore('router', {
   state: () => ({
     asyncRouters: [],
@@ -12,7 +11,7 @@ export const useRouterStore = defineStore('router', {
     currentActiveRouteList: [],
     activeRoutePath: '',
     activeRouteName: '',
-    activeRouteTitle: '',
+    activeRouteTitle: ''
 
   }),
   persist: true,
@@ -34,5 +33,4 @@ export const useRouterStore = defineStore('router', {
     }
   }
 })
-
 

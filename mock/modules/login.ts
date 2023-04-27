@@ -1,50 +1,47 @@
 export default [
     {
-        url: "/api/v1/login",
-        method: "post",
+        url: '/api/v1/login',
+        method: 'post',
         response: () => {
             return {
-                "code": 0,
-                "data": {
-                    "id": 1,
-                    "uid": "67cdf195-574d-456a-a761-c18b5b8585c1",
-                    "userName": "admin",
-                    "nickName": "小不点",
-                    "birth": "2022-07-20",
-                    "avatar": "https://qmplusimg.henrongyi.top/gva_header.jpg",
-                    "roleId": "0",
-                    "roleName": "管理员",
-                    "phone": "13212345678",
-                    "wechat": "",
-                    "email": "",
-                    "state": "",
-                    "motto": '前进的苦，是在于人要逼着自己开辟新的痛苦领域',
-                    "createdUser": "admin",
-                    "updatedUser": "admin",
-                    "createAt": "2022-07-20 20:44:58",
-                    "updateAt": "2022-07-20 20:44:58",
-                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiOGQzMGYzYWYtOGMxZC00MTg2LWJiZDgtZWY1NWNkMmUyYTk5IiwiSUQiOjEsIlVzZXJuYW1lIjoiYWRtaW4iLCJOaWNrTmFtZSI6Iui2hee6p-euoeeQhuWRmCIsIkF1dGhvcml0eUlkIjo4ODgsIkJ1ZmZlclRpbWUiOjg2NDAwLCJleHAiOjE2NTkwNjY0ODksImlzcyI6InFtUGx1cyIsIm5iZiI6MTY1ODQ2MDY4OX0.jKGW0SGFaV_CeYfw1vsdtcqD9NiDXEuxi6J_dvcQzrE",
-                    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiOGQzMGYzYWYtOGMxZC00MTg2LWJiZDgtZWY1NWNkMmUyYTk5IiwiSUQiOjEsIlVzZXJuYW1lIjoiYWRtaW4iLCJOaWNrTmFtZSI6Iui2hee6p-euoeeQhuWRmCIsIkF1dGhvcml0eUlkIjo4ODgsIkJ1ZmZlclRpbWUiOjg2NDAwLCJleHAiOjE2NTkwNjY0ODksImlzcyI6InFtUGx1cyIsIm5iZiI6MTY1ODQ2MDY4OX0.jKGW0SGFaV_CeYfw1vsdtcqD9NiDXEuxi6J_dvcQzrE",
+                'code': 0,
+                'msg': '成功',
+                'data': {
+                    'ID': 1,
+                    'UID': '123456789',
+                    'userName': 'admin',
+                    'nickName': '小不点',
+                    'birth': '2021-01-01',
+                    'avatar': 'avatar.jpg',
+                    'roleID': '0',
+                    'roleName': '管理员',
+                    'phone': '13269110806',
+                    'wechat': 'xiaohubai',
+                    'email': 'xiaohubai@outlook.com',
+                    'state': 0,
+                    'motto': '前进的苦，是在于人要逼着自己开辟新的痛苦领域',
+                    'token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIxMjM0NTY3ODkiLCJ1c2VyTmFtZSI6ImFkbWluIiwicGhvbmUiOiIxMzI2OTExMDgwNiIsInJvbGVJZCI6IjAiLCJyb2xlTmFtZSI6IueuoeeQhuWRmCIsInN0YXRlIjowLCJidWZmZXJUaW1lIjo4NjQwMCwiZXhwIjoxNjgzMjEzNTc0LCJpc3MiOiJ4aWFvaHViYWlAb3V0bG9vay5jb20iLCJuYmYiOjE2ODI2MDc3NzR9.2N0yeq0qw5fQUBZtCOdtZICGj_kBoik1d0mjm1SxK4g',
+                    'refreshToken': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIxMjM0NTY3ODkiLCJ1c2VyTmFtZSI6ImFkbWluIiwicGhvbmUiOiIxMzI2OTExMDgwNiIsInJvbGVJZCI6IjAiLCJyb2xlTmFtZSI6IueuoeeQhuWRmCIsInN0YXRlIjowLCJidWZmZXJUaW1lIjo4NjQwMCwiZXhwIjoxNjgzMjEzNTc0LCJpc3MiOiJ4aWFvaHViYWlAb3V0bG9vay5jb20iLCJuYmYiOjE2ODI2MDc3NzR9.2N0yeq0qw5fQUBZtCOdtZICGj_kBoik1d0mjm1SxK4g'
                 },
-                "msg": "登录成功"
-            };
+                'traceID': 'c85e9503736dcb10e499a2fb2c034c88'
+            }
         }
     },
     {
-        url: "/api/v1/captcha",
-        method: "get",
+        url: '/api/v1/captcha',
+        method: 'get',
         response: () => {
             return {
-                "code": 0,
-                "data": {
-                    "captchaId": "aUO9uS9ERNeyEGovfsAZ",
-                    "picPath": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAABQCAMAAAAQlwhOAAAA81BMVEUAAAB3QQTAik3jrXDtt3queDvapGfAik3Jk1bSnF+TXSDzvYDtt3qZYyZ+SAuZYyaveTyeaCvGkFOdZyrdp2rLlVjCjE+QWh31v4LLlVjWoGPVn2KZYyajbTDWoGOeaCt2QAOeaCvbpWiyfD/ps3btt3p5QwbrtXixez6BSw6yfD+/iUx4QgV9Rwrwun2RWx6jbTCUXiF0PgGMVhnCjE+qdDfRm16zfUDFj1K+iEufaSyVXyLirG+ocjXHkVTTnWCyfD9zPQCfaSzyvH/Jk1aYYiXPmVyLVRjyvH+8hkmJUxZ6RAd5Qwb0voGocjWVXyJ9RwonQe6sAAAAAXRSTlMAQObYZgAABtRJREFUeJzcXFtP3DoQ9oCgVbdF5aULi1QtW2kRoojlAVaIiwRHy1Xi//+cI0jizNWxEycczvSBJHY88+WzZ8aTbN0nknlEnz8D2DGUzOfNiP/8+V8htpt2qoMPxnsykJ6dnZ2BNIXl5CQJ8VZ7Tf8NvIkMb211QPwppcR7+9F2DCy3txgxOPhAW4YRhBfe5XOg/pJ8BzgAccFLRtNiZZLS+cuXMOJ9elphI9eIpChvK1TJZJKGONi6v7+P9UhYxbX3ydwF8Cs+eWzoDGzpJOFtEowX0Qj0GjpupeX11SMeu8fHIGIoH228v2g762qwCFjpqa5dR8T+YDwOMVyjjVfVzqb6sWJV1fH19bVrjk3fmtUgqg07Khuk7wzYniyVimoBFaoQ1TXDyt1PxZ9v32IQNxhCGe7LRdLB/Rn3XxbepwpxHktKj0GnWtdxmRYye0pit/gjNlfVU0drqCWOWlKrbg9aWK4E3rcthOzVexQWU8ohvttCVvA6CRg43iEQKwwDeIva8iwyKacQzC+/YGu+xqi5TLeMm1ITDK1dGYiwJWiDyleiay8vL+/K3vOUr18jEF9eNiHW7DbcBs6IUrMSUJ6iQjCfBiXeIhNNYvg4YEnDVQC3LI/orI5PSyCSYTlicWU/SguW42MTsWUfOl0ul5XyqV9oCWkJaAwreyPVkbf0WBbeWkZCe328rOyeTqcYBDDn5tTduvJo+K0imUZjeompxEv5blwfjUZUUQGZ2zp1ltlwUa9xJ5arJJRqK7vM/3Fcge8YU4mX8v27iRgbELd/wE2zi4sLz7HY2jKG+ZqpGJ7PKWKqOy/DjppD9g/BbsXJbDarGcYTW39q3CtWHkvi7b/WwXcO4NwPq6e3B9wMrWGgCXgxx02GfQBWXVYPCBUY1MofP3TECC+FKBjWnLLX4Dvkc9EJgp+0n8823sqTE3f6huIV1y7kmvWRCkX0sItW5GdLjEIL3RuaHYEyTJp8iQE9O34vZlUNSQ0E//yZAzHgFCGcPDKGadMr2UOLRJKxCiAzk+YVnI9hZHgoJrGdMmtinZXl6dMbJelQ53gfoniX5iisMMxH0RjmVVm+exzmDUtDzqs3JTPscBav7US683sX1y0hNpAwzL10w6iyeYVv0xbwYRyASu7uTMR0m6lYq2+JyJMAm27jEmtdrVZWWC/k8DAVsdVACwkgkskgw/UJ+Sd6WsuxDk4roCLuSMQbEMkw0bVuMuyYO0fWir7aECjFQvUjN5R/rs0gANfX13XtkMDwjcJwUUkAH4IZvQNCZvPJYFgJJBa/7ubmRivw0H1UBRRzng9USEBWPNRu1GtFM1zd5hleAdHrX7gY0awfMSseThhenwA1mfWtDshfB261Wvle5dO6Qn2GgQzQWPGgodLTrdYe0asLkoIXxyu3TYe+urqqh81F84HdtIEYhpkRUQiPBcQRW4u8NynWLlA5ZXubIya3ZpnaBwcm4o2NjULTm5rZbBZMtNBuqa4Cysgi6tKLxQItlhKvUVktn1YaQCEH9Wi8acMhw2cy70d2EIpHqEmhmGw9YSEXi10713YfHSSc9gXvw7slGaLYKdRJDajlwWDtvB3JcsvcwRVCKH0maIA4QSdjfZy6ZDOXelGk5RLBtSA1DgHtyRmOUrJHNaZBXi6XVlFEe63TIMJNs+aybZcHuCQle3t7zMyk+5eBthaTmngtI9XY3d2NqembsieUdvfX2MQkmoHmwdRplY8AdoPZSyszcydf5mhHvB9jWPdSukPuaGDOCCVfXZdydHQku6ITGocqhlss3Agrs2fYKuYj2cnaLYGXoWqPUXKmX45fbuSVmJD3yw9ZLNVsTCf57MxArO3uI2wgDJd+/+EhE+KFamXiICZeP6Ac8bzhBkZwLoYXC4E4x46CDrimYD4/l4jv8U2ypJ5HdIazqlpbW1P2ohTv5hve+3tqQccHH0qPVOmK+LQ6WEN7C/1Bbm5uIobR3qmS7XT15SdSkRKKo5Fyenoqxiz/ys6brBubY6KUESPJDLuOJZFTdTgFDmnVN5kt8KbJ1PVX23wbdYKSJ6CVnEFfFlTiv5PrxVE6mEwmZWnSR1rQKlb9ylQ/7sWIiX9f4CFnqbClSP31I5M85U1raMxwUPL/SN3Ai0OK1thGVQsf1N9/Q6D+mMWXkORrrxYqWkWZ3vBaP1cCBBqnuQHEY6uh9yjDJfS0Qj9XSmN4PDYRDyx8PRjffOoCh8BDpyUZ8T53u53hNb751KX4KGSA+PEXHT8/d0RMJYnhjB+FqPKr/Pv3L0Hcr9I4+d3HoL9+ecR9DN9Ffv/uB3Efg+aRXvB+Fvk3AAD//4PpQf3UAn0UAAAAAElFTkSuQmCC",
-                    "captchaLength": 6,
-                    "openCaptcha": true,
+                'code': 0,
+                'msg': '成功',
+                'data': {
+                    'captchaID': 'sqBxbScf1HaY2UY4uvRK',
+                    'picPath': 'data:image/png;base64,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',
+                    'captchaLength': 6
                 },
-                "msg": "验证码获取成功"
-            };
+                'traceID': 'b95c3aee401df5a70971ec7081773569'
+            }
         }
-    },
+    }
 
-];
+]

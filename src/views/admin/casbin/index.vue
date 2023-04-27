@@ -18,13 +18,19 @@
       </el-form>
     </div>
     <div class="cls-btn-search-casbin">
-      <el-button type="primary" icon="search" @click="getTableData">查询</el-button>
-      <el-button icon="refresh" @click="searchReset">重置</el-button>
+      <el-button type="primary" icon="search" @click="getTableData">
+        查询
+      </el-button>
+      <el-button icon="refresh" @click="searchReset">
+        重置
+      </el-button>
     </div>
   </el-card>
   <el-card class="cls-casbin-card">
     <div class="cls-btn-add-casbin">
-      <el-button type="primary" icon="Plus" @click="addCasbin()">新增权限</el-button>
+      <el-button type="primary" icon="Plus" @click="addCasbin()">
+        新增权限
+      </el-button>
     </div>
     <el-table :data="tableData" border row-key="ID">
       <el-table-column align="left" label="ID" min-width="30" prop="ID" />
@@ -36,15 +42,19 @@
 
       <el-table-column align="left" fixed="right" label="操作" width="180">
         <template #default="scope">
-          <el-button type="primary" link icon="edit" @click="editCasbin(scope.row)">编辑</el-button>
-          <el-button type="primary" link icon="delete" @click="deleteCasbin(scope.row.ID)">删除</el-button>
+          <el-button type="primary" link icon="edit" @click="editCasbin(scope.row)">
+            编辑
+          </el-button>
+          <el-button type="primary" link icon="delete" @click="deleteCasbin(scope.row.ID)">
+            删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
     <div class="cls-pagination">
       <el-pagination v-model:current-page="page" v-model:page-size="pageSize" :page-sizes="[10, 30, 50, 100]"
-        :total="total" layout="total, sizes, prev, pager, next, jumper" @current-change="handleCurrentChange"
-        @size-change="handleSizeChange" />
+                     :total="total" layout="total, sizes, prev, pager, next, jumper" @current-change="handleCurrentChange"
+                     @size-change="handleSizeChange" />
     </div>
   </el-card>
   <el-dialog v-model="dialogVisible" :before-close="handleClose" :title="dialogTitle">
@@ -66,8 +76,12 @@
     </el-form>
     <template #footer>
       <div class="cls-dialog-footer">
-        <el-button @click="closeDialog">取 消</el-button>
-        <el-button type="primary" @click="submitDialog">确 定</el-button>
+        <el-button @click="closeDialog">
+          取 消
+        </el-button>
+        <el-button type="primary" @click="submitDialog">
+          确 定
+        </el-button>
       </div>
     </template>
   </el-dialog>
@@ -77,22 +91,22 @@
 import { ref, reactive } from 'vue'
 import { getRoleCasbinList, updateRoleCasbin, addRoleCasbin, deleteRoleCasbin } from '@/api/casbin'
 
-import { useDictStore } from '@/pinia/modules/dict';
-import { storeToRefs } from 'pinia';
+import { useDictStore } from '@/pinia/modules/dict'
+import { storeToRefs } from 'pinia'
 import { ElMessage } from 'element-plus'
 
 //搜索
 const searchForm = ref({
   path: '',
   roleIDs: '',
-  method: '',
+  method: ''
 })
 
 const initSearchForm = () => {
   searchForm.value = {
     path: '',
     roleIDs: '',
-    method: '',
+    method: ''
   }
 }
 
@@ -100,7 +114,6 @@ const searchReset = () => {
   initSearchForm()
   getTableData()
 }
-
 
 const dictStore = useDictStore()
 const { role_info, method_info } = storeToRefs(dictStore)
@@ -152,14 +165,14 @@ const form = ref({
   path: '',
   desc: '',
   roleIDs: '',
-  method: '',
+  method: ''
 })
 
 const rules = reactive({
   path: [{ required: true, message: '必填', trigger: 'blur' }],
   desc: [{ required: true, message: '必填', trigger: 'blur' }],
   roleIDs: [{ required: true, message: '必填', trigger: 'blur' }],
-  method: [{ required: true, message: '必填', trigger: 'blur' }],
+  method: [{ required: true, message: '必填', trigger: 'blur' }]
 })
 
 const initForm = () => {
@@ -168,7 +181,7 @@ const initForm = () => {
     path: '',
     desc: '',
     roleIDs: '',
-    method: '',
+    method: ''
   }
 }
 
@@ -188,7 +201,7 @@ const editCasbin = (data) => {
     path: data.path,
     desc: data.desc,
     roleIDs: data.roleIDs,
-    method: data.method,
+    method: data.method
   }
 }
 const handleClose = (done) => {
@@ -221,7 +234,7 @@ const submitDialog = async () => {
       path: form.value.path,
       desc: form.value.desc,
       roleIDs: form.value.roleIDs,
-      method: form.value.method,
+      method: form.value.method
     }
     const res: any = await addRoleCasbin(data)
     if (res.code === 0) {
@@ -232,8 +245,6 @@ const submitDialog = async () => {
   initForm()
   dialogVisible.value = false
 }
-
-
 
 </script>
 

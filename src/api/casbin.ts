@@ -23,7 +23,6 @@ export const addRoleCasbin = (data) => {
     })
 }
 
-
 export const deleteRoleCasbin = (data) => {
     return service({
         url: '/v1/delete/roleCasbin',

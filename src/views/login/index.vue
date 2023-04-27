@@ -4,10 +4,12 @@
       <div class="login_panel_form">
         <div class="login_panel_form_title">
           <img class="login_panel_form_title_logo" :src="config.appLogo" alt>
-          <p class="login_panel_form_title_p">{{ config.appName }}</p>
+          <p class="login_panel_form_title_p">
+            {{ config.appName }}
+          </p>
         </div>
         <el-form ref="loginForm" :model="loginFormData" :rules="rules" :validate-on-rule-change="false"
-          @keyup.enter="submitForm">
+                 @keyup.enter="submitForm">
           <el-form-item prop="username">
             <el-input v-model="loginFormData.username" size="large" placeholder="请输入用户名" suffix-icon="user" />
           </el-form-item>
@@ -17,29 +19,30 @@
           <el-form-item v-if="loginFormData.openCaptcha" prop="captcha">
             <div class="vPicBox">
               <el-input v-model="loginFormData.captcha" placeholder="请输入验证码" size="large"
-                style="flex:1;padding-right: 20px;" />
+                        style="flex:1;padding-right: 20px;" />
               <div class="vPic">
                 <img v-if="picPath" :src="picPath" alt="请输入验证码" @click="loginVerify()">
               </div>
             </div>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" style="width: 46%" size="large" @click="checkInit">注 册</el-button>
-            <el-button type="primary" size="large" style="width: 46%; margin-left: 8%" @click="submitForm">登 录</el-button>
+            <el-button type="primary" style="width: 46%" size="large" @click="checkInit">
+              注 册
+            </el-button>
+            <el-button type="primary" size="large" style="width: 46%; margin-left: 8%" @click="submitForm">
+              登 录
+            </el-button>
           </el-form-item>
         </el-form>
       </div>
       <div class="login_panel_right" />
       <div class="login_panel_foot">
         <div class="links">
-
           <a href="https://github.com/flipped-aurora/gin-vue-admin" target="_blank">
             <img src="@/assets/github.png" class="link-icon" alt="github">
           </a>
-
         </div>
-        <div class="copyright">
-        </div>
+        <div class="copyright" />
       </div>
     </div>
   </div>
@@ -76,13 +79,12 @@ const loginVerify = () => {
       max: ele.data.captchaLength,
       min: ele.data.captchaLength,
       message: `请输入${ele.data.captchaLength}位验证码`,
-      trigger: 'blur',
+      trigger: 'blur'
     })
     picPath.value = ele.data.picPath
     loginFormData.captchaId = ele.data.captchaId
   })
 }
-
 
 loginVerify()
 
@@ -94,7 +96,7 @@ const loginFormData = reactive({
   password: '123456',
   captcha: '',
   captchaId: '',
-  openCaptcha: true,
+  openCaptcha: true
 })
 const rules = reactive({
   username: [{ validator: checkUsername, trigger: 'blur' }],
@@ -102,9 +104,9 @@ const rules = reactive({
   captcha: [
     {
       message: '验证码格式不正确',
-      trigger: 'blur',
-    },
-  ],
+      trigger: 'blur'
+    }
+  ]
 })
 
 const userStore = useUserStore()
@@ -122,7 +124,7 @@ const submitForm = () => {
       ElMessage({
         type: 'error',
         message: '请正确填写登录信息',
-        showClose: true,
+        showClose: true
       })
       loginVerify()
       return false
@@ -135,8 +137,6 @@ const checkInit = async () => {
 }
 
 </script>
-
-
 
 <style lang="scss" scoped>
 #userLayout {
@@ -255,7 +255,6 @@ const checkInit = async () => {
     width: 100%;
   }
 }
-
 
 /*
   powerBy : bypanghu@163.com

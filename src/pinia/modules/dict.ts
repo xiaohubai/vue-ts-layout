@@ -5,8 +5,8 @@ import { ElMessage } from 'element-plus'
 export const useDictStore = defineStore('dict', {
     state: () => ({
         app_info: {
-            name: "",
-            logo: ""
+            name: '',
+            logo: ''
         },
         state_info: {},
         lang_info: [],
@@ -26,6 +26,6 @@ export const useDictStore = defineStore('dict', {
             }
             ElMessage({ type: 'error', message: '获取字典序失败' })
             return false
-        },
+        }
     }
 })
