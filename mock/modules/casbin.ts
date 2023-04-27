@@ -1,92 +1,126 @@
 export default [
     {
-        url: "/api/v1/get/casbinList",
-        method: "post",
+        url: '/api/v1/get/roleCasbinList',
+        method: 'post',
         response: () => {
             return {
-                "code": 0,
-                "data": {
-                    "list": [
+                'code': 0,
+                'msg': '成功',
+                'data': {
+                    'page': 1,
+                    'pageSize': 10,
+                    'total': 10,
+                    'list': [
                         {
-                            "ID": 1,
-                            "roleIDs": "0",
-                            "path": "/v1/add/casbin",
-                            "method": "POST",
+                            'ID': 1,
+                            'roleIDs': '0',
+                            'path': '/v1/get/dictList',
+                            'method': 'GET',
+                            'desc': '获取菜单'
                         },
                         {
-                            "ID": 3,
-                            "roleIDs": "0",
-                            "path": "/v1/get/dict",
-                            "method": "POST",
+                            'ID': 2,
+                            'roleIDs': '0',
+                            'path': '/v1/get/allMenuList',
+                            'method': 'GET',
+                            'desc': ''
                         },
                         {
-                            "ID": 4,
-                            "roleIDs": "0",
-                            "path": "/v1/get/casbinList",
-                            "method": "POST",
+                            'ID': 3,
+                            'roleIDs': '0',
+                            'path': '/v1/get/roleMenuList',
+                            'method': 'GET',
+                            'desc': ''
                         },
                         {
-                            "ID": 5,
-                            "roleIDs": "0",
-                            "path": "/v1/get/roleMenuList",
-                            "method": "POST",
-                            "desc": '获取角色菜单'
+                            'ID': 4,
+                            'roleIDs': '0',
+                            'path': '/v1/get/roleCasbinList',
+                            'method': 'POST',
+                            'desc': ''
                         },
                         {
-                            "ID": 6,
-                            "roleIDs": "0",
-                            "path": "/v1/get/userInfo",
-                            "method": "GET",
-                            "desc": '获取用户信息'
+                            'ID': 5,
+                            'roleIDs': '0',
+                            'path': '/v1/get/setting',
+                            'method': 'GET',
+                            'desc': ''
                         },
                         {
-                            "ID": 7,
-                            "roleIDs": "0",
-                            "path": "/v1/get/allUserInfoList",
-                            "method": "GET",
-                            "desc": '获取全部用户信息'
+                            'ID': 6,
+                            'roleIDs': '0',
+                            'path': '/v1/update/setting',
+                            'method': 'POST',
+                            'desc': ''
                         },
                         {
-                            "ID": 8,
-                            "roleIDs": "0",
-                            "path": "/v1/setUserInfo",
-                            "method": "POST",
-                            "desc": '设置用户信息'
+                            'ID': 7,
+                            'roleIDs': '0',
+                            'path': '/v1/add/roleMenu',
+                            'method': 'POST',
+                            'desc': ''
+                        },
+                        {
+                            'ID': 8,
+                            'roleIDs': '0',
+                            'path': '/v1/delete/roleMenu',
+                            'method': 'POST',
+                            'desc': ''
+                        },
+                        {
+                            'ID': 9,
+                            'roleIDs': '0',
+                            'path': '/v1/update/roleMenu',
+                            'method': 'POST',
+                            'desc': ''
+                        },
+                        {
+                            'ID': 10,
+                            'roleIDs': '0',
+                            'path': '/v1/add/roleCasbin',
+                            'method': 'POST',
+                            'desc': ''
                         }
-                    ],
-                    "page": 1,
-                    "pageSize": 10,
-                    "total": 8
+                    ]
                 },
-                "msg": "成功",
-                "traceID": "77c9004f04cc8303"
-            };
+                'traceID': '87330ca9d6c660443ebeaf363e55fe89'
+            }
         }
     },
     {
-        url: "/api/v1/update/casbin",
-        method: "post",
+        url: '/api/v1/update/roleCasbin',
+        method: 'post',
         response: () => {
             return {
-                "code": 0,
-                "data": {
-                },
-                "msg": "成功",
-                "trace_id": "48c3b35188f3dae5"
-            };
+                'code': 0,
+                'msg': '成功',
+                'data': {},
+                'traceID': 'b585f21e7b354774478f9cfe737bb824'
+            }
         }
     },
     {
-        url: "/api/v1/add/casbin",
-        method: "post",
+        url: '/api/v1/add/roleCasbin',
+        method: 'post',
         response: () => {
             return {
-                "code": 0,
-                "data": {
-                },
-                "msg": "成功",
-                "trace_id": "48c3b35188f3dae5"
-            };
+                'code': 0,
+                'msg': '成功',
+                'data': {},
+                'traceID': 'd3e77d94be9144d05571650ba071e4ea'
+            }
         }
     },
+    {
+        url: '/api/v1/delete/roleCasbin',
+        method: 'post',
+        response: () => {
+            return {
+                'code': 0,
+                'msg': '成功',
+                'data': {},
+                'traceID': 'cd82f9e64fc6b02e4a176d6a463061ce'
+            }
+        }
+    }
 ]
