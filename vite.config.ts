@@ -28,7 +28,6 @@ export default defineConfig(({ mode }) => {
       outDir: 'dist', // 产出目录
       chunkSizeWarningLimit: 2000
     },
-    
     plugins: [
       vue(),
       vueSetupExtend(),
