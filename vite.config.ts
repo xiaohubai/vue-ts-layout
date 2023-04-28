@@ -13,6 +13,7 @@ export default defineConfig(({ mode }) => {
         'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js'
       }
     },
+
     server: {
       port: Number(env.VITE_WEB_PORT),
       proxy: {
@@ -23,6 +24,7 @@ export default defineConfig(({ mode }) => {
         }
       }
     },
+
     build: {
       //https://cn.vitejs.dev/config/build-options.html
       outDir: 'dist', // 产出目录
