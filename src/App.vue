@@ -19,7 +19,7 @@ const elocale = ref(messages.value[locale.value])
 
 //监听语言设置,实时切换i18n和element-plus语言
 const changeLocale = () => {
-  locale.value = lang.value === 'zh-cn' ? 'zh-cn' : 'en'
+  locale.value = lang.value
   elocale.value = messages.value[locale.value]
 }
 watch(() => lang.value, () => { changeLocale() }, { immediate: true, deep: true })
