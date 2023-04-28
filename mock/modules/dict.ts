@@ -8,7 +8,7 @@ export default [
                 'msg': '成功',
                 'data': {
                     'app_info': {
-                        'logo': 'https://www.gin-vue-admin.com/img/logo.png',
+                        'logo': 'http://172.21.0.2:8080/logo.png',
                         'name': '风控分析平台'
                     },
                     'lang_info': [

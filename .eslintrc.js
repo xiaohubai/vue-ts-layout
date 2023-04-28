@@ -9,7 +9,7 @@ module.exports = {
 		'plugin:@typescript-eslint/recommended'
 	],
 	rules: {
-		quotes: ['error', 'single'],// 强制使用一致的反勾号、双引号或单引号
+		quotes: ['error', 'single', { 'allowTemplateLiterals': true }],// 强制使用一致的反勾号、双引号或单引号
 		eqeqeq: 'off', // 要求使用 === 和 !==
 		semi: ['error', 'never'], // 要求或禁止使用分号代替 ASI
 		'max-len': ['error', 240], // 强制一行的最大长度

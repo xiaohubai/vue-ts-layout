@@ -1,9 +1,9 @@
-import { loadEnv } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import { viteMockServe } from 'vite-plugin-mock'
 import vueSetupExtend from 'vite-plugin-vue-setup-extend-plus'
 import vue from '@vitejs/plugin-vue'
 
-export default ({ mode }) => {
+export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
   return {
     base: './',
@@ -16,7 +16,7 @@ export default ({ mode }) => {
       }
     },
     server: {
-      port: env.VITE_WEB_PORT,
+      port: Number(env.VITE_WEB_PORT),
       proxy: {
         [env.VITE_SERVER_PREFIX_API]: {
           target: env.VITE_SERVER_API_URL,
@@ -26,11 +26,10 @@ export default ({ mode }) => {
       }
     },
     build: {
-      target: 'es2017',
-      minify: 'terser',// 是否进行压缩
       manifest: false, // 是否产出maifest.json
       sourcemap: false, // 是否产出soucemap.json
-      outDir: 'dist' // 产出目录
+      outDir: 'dist', // 产出目录
+      chunkSizeWarningLimit: 2000
     },
 
     plugins: [
@@ -39,10 +38,12 @@ export default ({ mode }) => {
       viteMockServe({
         supportTs: true,
         mockPath: 'mock',
-        localEnabled: (env.VITE_MOCK === 'true' ? true : false), // mock开关
-        watchFiles: true, // 监视文件更改
-        logger: true
+        localEnabled: (env.VITE_DEV_MOCK === 'true' ? true : false), // mock本地环境开关
+        prodEnabled: (env.VITE_PROD_MOCK === 'true' ? true : false), // mock生产环境开关
+        injectCode: `import { setupProdMockServer } from '../mock/mockProdServer'; setupProdMockServer()`, //injectFile默认是src/main.ts
+        watchFiles: true,
+        logger: false
       })
     ]
   }
-}
+})
