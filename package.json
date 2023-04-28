@@ -2,9 +2,9 @@
   "name": "vue-ts-layout",
   "version": "0.0.1",
   "scripts": {
-    "dev": "vite --host --mode development --base=/",
-    "build": "vite build --mode production --base=/",
-    "gitBuild": "vite build --mode production --base=/vue-ts-layout/",
+    "dev": "vite --host --mode development",
+    "build": "vite build --mode production",
+    "gitBuild": "vite build --mode production",
     "preview": "vite preview --host --port 8080"
   },
   "license": "MIT",
