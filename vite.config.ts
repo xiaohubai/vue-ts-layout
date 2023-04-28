@@ -7,7 +7,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
   return {
     base: '/vue-ts-layout/',
-
+    root:'./',
     resolve: {
       alias: {
         '@': __dirname + '/src',
