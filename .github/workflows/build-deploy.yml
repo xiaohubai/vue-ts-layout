@@ -44,7 +44,6 @@ jobs:
       - name: Install Dependencies
         run: |
           pnpm install
-          sed -i "s#VITE_BASE_NAME = /#VITE_BASE_NAME = /vue-ts-layout/#g" $(pwd)/.env.production
       - name: Build
         run: pnpm run build
       - name: Setup Pages
