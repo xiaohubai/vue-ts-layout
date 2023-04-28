@@ -6,8 +6,7 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
   return {
-    base: '/vue-ts-layout/',
-    root:'./',
+    base: env.VITE_BASE_NAME,
     resolve: {
       alias: {
         '@': __dirname + '/src',
