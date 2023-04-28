@@ -6,8 +6,6 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
   return {
-    base: env.VITE_BASE_NAME, //github page需要设置为项目名
-    root: './',
     resolve: {
       alias: {
         '@': __dirname + '/src',
@@ -26,8 +24,7 @@ export default defineConfig(({ mode }) => {
       }
     },
     build: {
-      manifest: false, // 是否产出maifest.json
-      sourcemap: false, // 是否产出soucemap.json
+      //https://cn.vitejs.dev/config/build-options.html
       outDir: 'dist', // 产出目录
       chunkSizeWarningLimit: 2000
     },
@@ -38,8 +35,8 @@ export default defineConfig(({ mode }) => {
       viteMockServe({
         supportTs: true,
         mockPath: 'mock',
-        localEnabled: (env.VITE_DEV_MOCK === 'true' ? true : false), // mock本地环境开关
-        prodEnabled: (env.VITE_PROD_MOCK === 'true' ? true : false), // mock生产环境开关
+        localEnabled:Boolean( env.VITE_DEV_MOCK), // mock本地环境开关
+        prodEnabled: Boolean(env.VITE_PROD_MOCK), // mock生产环境开关
         injectCode: `import { setupProdMockServer } from '../mock/mockProdServer'; setupProdMockServer()`, //injectFile默认是src/main.ts
         watchFiles: true,
         logger: false
