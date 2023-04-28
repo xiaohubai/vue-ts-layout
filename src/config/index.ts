@@ -1,6 +1,6 @@
 const config = {
     appName: '风控与分析平台',
-    appLogo: 'http://172.21.0.2:8080/logo.png'
+    appLogo: 'https://i.postimg.cc/V6qrFqr1/3.png'
 }
 
 export default config

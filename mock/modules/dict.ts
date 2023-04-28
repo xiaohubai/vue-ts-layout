@@ -8,7 +8,7 @@ export default [
                 'msg': '成功',
                 'data': {
                     'app_info': {
-                        'logo': 'http://172.21.0.2:8080/logo.png',
+                        'logo': 'https://i.postimg.cc/V6qrFqr1/3.png',
                         'name': '风控分析平台'
                     },
                     'lang_info': [

@@ -1,22 +1,14 @@
 <template>
   <div>
-    <span>Powered by</span>
+    <span>Copyright ©️ </span>
     <span>
-      <a href="https://github.com/flipped-aurora/gin-vue-admin">{{ app_info.name }}</a>
-    </span>
-    <el-divider direction="vertical" />
-    <span>Copyright</span>
-    <span>
-      <a href="https://github.com/flipped-aurora">{{ app_info.name }}</a>
+      <a href="https://github.com/xiaohubai/vue-ts-layout">Xiaohu Bai</a>
     </span>
   </div>
 </template>
 
 <script setup lang="ts" name="Footer">
-import { useDictStore } from '@/pinia/modules/dict'
-import { storeToRefs } from 'pinia'
-const dictStore = useDictStore()
-const { app_info } = storeToRefs(dictStore)
+
 </script>
 <style lang="scss" scoped>
 a {

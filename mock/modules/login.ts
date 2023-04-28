@@ -12,7 +12,7 @@ export default [
                     'userName': 'admin',
                     'nickName': '小不点',
                     'birth': '2021-01-01',
-                    'avatar': 'avatar.jpg',
+                    'avatar': 'https://i.postimg.cc/15038Rxn/4.png',
                     'roleID': '0',
                     'roleName': '管理员',
                     'phone': '13269110806',

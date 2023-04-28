@@ -38,7 +38,7 @@
       <div class="login_panel_right" />
       <div class="login_panel_foot">
         <div class="links">
-          <a href="https://github.com/flipped-aurora/gin-vue-admin" target="_blank">
+          <a href="https://github.com/xiaohubai/vue-ts-layout" target="_blank">
             <img src="@/assets/github.png" class="link-icon" alt="github">
           </a>
         </div>
