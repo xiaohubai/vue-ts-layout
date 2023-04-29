@@ -12,10 +12,9 @@
 vue-ts-layout 是一个前端模板，它基于 Vite4.x、Vue3.x、Vue-router4.x、Pinia、Element-plus、TypeScript 实现。它使用了最新的前端技术栈，内置了 vue-i18n 国际化解决方案，动态路由，提炼了典型的业务模型,它可以帮助你快速搭建企业级中后台产品原型。也可以作为一个示例，用于学习 Vue3、Vite、Ts 等主流技术。
 
 ## 安装
-安装
-
+- 安装git[https://xiaohubai.github.io/docs/git]
 ```sh
-$
+$ git clone https://github.com/xiaohubai/vue-ts-layout.git
 ```
 
 ## 使用说明

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <span>Copyright ©️ </span>
+    <span>Copyright © 2023. All rights reserved.</span>
     <span>
-      <a href="https://github.com/xiaohubai/vue-ts-layout">Xiaohu Bai</a>
+      <a href="https://github.com/xiaohubai">github</a>
     </span>
   </div>
 </template>
