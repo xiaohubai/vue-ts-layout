@@ -1,9 +1,9 @@
 <template>
   <div class="cls-aside" :style="{ background: theme.backgroundColor }">
     <div class="cls-logo">
-      <img class="cls-img" :src="config.appImg">
+      <img class="cls-img" :src="logo.img">
       <div v-if="!collapse" class="cls-title" :style="{ color: sideModeColor == '#000000' ? '#ffffff' : '#000000' }">
-        {{ config.appName }}
+        {{ logo.name }}
       </div>
     </div>
 
@@ -38,10 +38,13 @@ import { useRouterStore } from '@/pinia/modules/router'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useSettingStore } from '@/pinia/modules/setting'
-import config from '@/config'
 const router = useRouter()
 const settingStore = useSettingStore()
 const routerStore = useRouterStore()
+const logo = {
+  img: import.meta.env.VITE_LOGO_IMG,
+  name: import.meta.env.VITE_LOGO_NAME
+}
 
 const {
   asyncRouters,
