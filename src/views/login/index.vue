@@ -3,9 +3,9 @@
     <div class="cls-login-panel">
       <div class="cls-login-left">
         <div class="cls-login-left-logo">
-          <img class="cls-login-left-logo-img" :src="logo.img">
+          <img class="cls-login-left-logo-img" :src="config.appImg">
           <p class="cls-login-left-logo-title">
-            {{ logo.name }}
+            {{ config.appName }}
           </p>
         </div>
         <div class="cls-login-left-form">
@@ -48,15 +48,12 @@ import { ElMessage } from 'element-plus'
 import { captcha } from '@/api/user'
 import { useUserStore } from '@/pinia/modules/user'
 import type { FormInstance, FormRules } from 'element-plus'
+import config from '@/config'
 
 const ruleFormRef = ref<FormInstance>()
 
 const userStore = useUserStore()
 
-const logo = {
-  img: import.meta.env.VITE_LOGO_IMG,
-  name: import.meta.env.VITE_LOGO_NAME
-}
 const form = ref({
   username: 'admin',
   password: '123456',
