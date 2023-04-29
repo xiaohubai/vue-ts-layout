@@ -29,14 +29,13 @@ export default defineConfig(({ mode }) => {
       outDir: 'dist', // 产出目录
       chunkSizeWarningLimit: 2000
     },
-
     plugins: [
       vue(),
       vueSetupExtend(),
       viteMockServe({
         supportTs: true,
         mockPath: 'mock',
-        localEnabled:Boolean( env.VITE_DEV_MOCK), // mock本地环境开关
+        localEnabled: Boolean(env.VITE_DEV_MOCK), // mock本地环境开关
         prodEnabled: Boolean(env.VITE_PROD_MOCK), // mock生产环境开关
         injectCode: `import { setupProdMockServer } from '../mock/mockProdServer'; setupProdMockServer()`, //injectFile默认是src/main.ts
         watchFiles: true,

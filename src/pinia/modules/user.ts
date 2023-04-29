@@ -1,4 +1,3 @@
-import { ElMessage } from 'element-plus'
 import { defineStore } from 'pinia'
 import router from '@/router'
 import { login } from '@/api/user'
@@ -56,7 +55,6 @@ export const useUserStore = defineStore('user', {
                 await router.replace({ name: settingStore.defaultRouter })
                 return true
             }
-            ElMessage({ type: 'error', message: '登录失败' })
             return false
         },
         async ClearStorage() {

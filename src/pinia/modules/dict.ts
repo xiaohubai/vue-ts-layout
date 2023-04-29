@@ -4,10 +4,6 @@ import { ElMessage } from 'element-plus'
 
 export const useDictStore = defineStore('dict', {
     state: () => ({
-        app_info: {
-            name: '',
-            logo: ''
-        },
         state_info: {},
         lang_info: [],
         role_info: [],

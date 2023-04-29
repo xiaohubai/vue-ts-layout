@@ -33,10 +33,4 @@
   font-size: 24px;
 }
 
-.inner img {
-  width: 60px;
-  height: 60px;
-  margin-left: 44%;
-  margin-top: 20px;
-}
 </style>

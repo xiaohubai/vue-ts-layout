@@ -1,262 +1,216 @@
 <template>
-  <div id="userLayout">
-    <div class="login_panel">
-      <div class="login_panel_form">
-        <div class="login_panel_form_title">
-          <img class="login_panel_form_title_logo" :src="config.appLogo" alt>
-          <p class="login_panel_form_title_p">
-            {{ config.appName }}
+  <div id="cls-login">
+    <div class="cls-login-panel">
+      <div class="cls-login-left">
+        <div class="cls-login-left-logo">
+          <img class="cls-login-left-logo-img" :src="logo.img">
+          <p class="cls-login-left-logo-title">
+            {{ logo.name }}
           </p>
         </div>
-        <el-form ref="loginForm" :model="loginFormData" :rules="rules" :validate-on-rule-change="false"
-                 @keyup.enter="submitForm">
-          <el-form-item prop="username">
-            <el-input v-model="loginFormData.username" size="large" placeholder="请输入用户名" suffix-icon="user" />
-          </el-form-item>
-          <el-form-item prop="password">
-            <el-input v-model="loginFormData.password" show-password size="large" type="password" placeholder="请输入密码" />
-          </el-form-item>
-          <el-form-item v-if="loginFormData.openCaptcha" prop="captcha">
-            <div class="vPicBox">
-              <el-input v-model="loginFormData.captcha" placeholder="请输入验证码" size="large"
-                        style="flex:1;padding-right: 20px;" />
-              <div class="vPic">
-                <img v-if="picPath" :src="picPath" alt="请输入验证码" @click="loginVerify()">
+        <div class="cls-login-left-form">
+          <el-form ref="ruleFormRef" :model="form" :rules="rules">
+            <el-form-item prop="username">
+              <el-input v-model="form.username" size="large" placeholder="请输入用户名" suffix-icon="user" />
+            </el-form-item>
+            <el-form-item prop="password">
+              <el-input v-model="form.password" show-password size="large" type="password" placeholder="请输入密码" />
+            </el-form-item>
+            <el-form-item prop="captcha">
+              <div class="cls-login-left-form-captcha">
+                <el-input v-model="form.captcha" placeholder="请输入验证码" size="large" style="flex:1;padding-right: 20px;" />
+                <div class="cls-login-left-form-captcha-img">
+                  <img :src="captchaImg" alt="请输入验证码" @click="getCaptcha()">
+                </div>
               </div>
-            </div>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" style="width: 46%" size="large" @click="checkInit">
-              注 册
-            </el-button>
-            <el-button type="primary" size="large" style="width: 46%; margin-left: 8%" @click="submitForm">
-              登 录
-            </el-button>
-          </el-form-item>
-        </el-form>
-      </div>
-      <div class="login_panel_right" />
-      <div class="login_panel_foot">
-        <div class="links">
-          <a href="https://github.com/xiaohubai/vue-ts-layout" target="_blank">
-            <img src="@/assets/github.png" class="link-icon" alt="github">
-          </a>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" style="width: 46%" size="large" @click="register">
+                注 册
+              </el-button>
+              <el-button type="primary" size="large" style="width: 46%; margin-left: 8%"
+                @click="submitLoginForm(ruleFormRef)">
+                登 录
+              </el-button>
+            </el-form-item>
+          </el-form>
+
         </div>
-        <div class="copyright" />
       </div>
+      <div class="cls-login-right" />
     </div>
   </div>
 </template>
 
-<script setup name="Login">
-
-import { captcha } from '@/api/user'
-import { reactive, ref } from 'vue'
+<script setup lang="ts" name="logins">
+import { ref, reactive } from 'vue'
 import { ElMessage } from 'element-plus'
+import { captcha } from '@/api/user'
 import { useUserStore } from '@/pinia/modules/user'
-import config from '@/config/index'
+import type { FormInstance, FormRules } from 'element-plus'
 
-// 验证函数
-const checkUsername = (rule, value, callback) => {
-  if (value.length < 5) {
-    return callback(new Error('请输入正确的用户名'))
-  } else {
-    callback()
-  }
+const ruleFormRef = ref<FormInstance>()
+
+const userStore = useUserStore()
+
+const logo = {
+  img: import.meta.env.VITE_LOGO_IMG,
+  name: import.meta.env.VITE_LOGO_NAME
 }
-const checkPassword = (rule, value, callback) => {
-  if (value.length < 6) {
-    return callback(new Error('请输入正确的密码'))
-  } else {
-    callback()
-  }
-}
-
-// 获取验证码
-const loginVerify = () => {
-  captcha({}).then(async (ele) => {
-    rules.captcha.push({
-      max: ele.data.captchaLength,
-      min: ele.data.captchaLength,
-      message: `请输入${ele.data.captchaLength}位验证码`,
-      trigger: 'blur'
-    })
-    picPath.value = ele.data.picPath
-    loginFormData.captchaId = ele.data.captchaId
-  })
-}
-
-loginVerify()
-
-// 登录相关操作
-const loginForm = ref(null)
-const picPath = ref('')
-const loginFormData = reactive({
+const form = ref({
   username: 'admin',
   password: '123456',
   captcha: '',
-  captchaId: '',
-  openCaptcha: true
+  captchaId: ''
 })
-const rules = reactive({
-  username: [{ validator: checkUsername, trigger: 'blur' }],
-  password: [{ validator: checkPassword, trigger: 'blur' }],
-  captcha: [
-    {
-      message: '验证码格式不正确',
-      trigger: 'blur'
-    }
-  ]
+const captchaImg = ref('')
+
+const rules = reactive<FormRules>({
+  username: [{ required: true, message: '必填', trigger: 'blur' }],
+  password: [{ required: true, message: '必填', trigger: 'blur' },
+  { min: 6, message: '最少6个字符', trigger: 'blur' },
+  {
+    validator: (rule, value, callback) => {
+      if (value.length < 6) {
+        callback(new Error('请输入大于6位字符的密码'))
+      } else {
+        callback()
+      }
+    },
+    trigger: 'blur'
+  }],
+  captcha: [{ required: true, message: '必填', trigger: 'blur' },
+  { min: 6, message: '请输入6位验证码', trigger: 'blur' },
+  {
+    validator: (rule, value, callback) => {
+      if (value.length !== 6) {
+        callback(new Error('请输入6位验证码'))
+      } else {
+        callback()
+      }
+    },
+    trigger: 'blur'
+  }]
 })
 
-const userStore = useUserStore()
-const login = async () => {
-  return await userStore.LoginIn(loginFormData)
+const getCaptcha = async () => {
+  const res: any = await captcha()
+  if (res.code == 0) {
+    captchaImg.value = res.data.picPath
+    form.value.captchaId = res.data.captchaId
+  }
 }
-const submitForm = () => {
-  loginForm.value.validate(async (v) => {
-    if (v) {
-      const flag = await login()
-      if (!flag) {
-        loginVerify()
+getCaptcha()
+
+const submitLoginForm = async (formEl: FormInstance | undefined) => {
+  if (!formEl) return
+  await formEl.validate((valid) => {
+    if (valid) {
+      const ok: any = userStore.LoginIn(form)
+      if (!ok) {
+        ElMessage({ type: 'error', message: '登录失败' })
+        getCaptcha()
       }
     } else {
-      ElMessage({
-        type: 'error',
-        message: '请正确填写登录信息',
-        showClose: true
-      })
-      loginVerify()
       return false
     }
   })
 }
 
-// 跳转初始化
-const checkInit = async () => {
+
+const register = () => {
 }
 
 </script>
 
 <style lang="scss" scoped>
-#userLayout {
-  margin: 0;
-  padding: 0;
-  background-image: url("@/assets/login_background.jpg");
+#cls-login {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
   background-size: cover;
-  width: 100%;
-  height: 100%;
-  position: relative;
+  background-image: url("@/assets/login_background.jpg");
 
-  .input-icon {
-    padding-right: 6px;
-    padding-top: 4px;
-  }
-
-  .login_panel {
-    position: absolute;
-    top: 3vh;
-    left: 2vw;
-    width: 96vw;
-    height: 94vh;
-    background-color: rgba(255, 255, 255, .8);
-    border-radius: 10px;
+  .cls-login-panel {
     display: flex;
+    width: 96%;
+    height: 94%;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, .8);
+    justify-content: space-around;
     align-items: center;
-    justify-content: space-evenly;
 
-    .login_panel_right {
-      background-image: url("@/assets/login_left.svg");
+
+    .cls-login-left {
+      display: flex;
+      width: 500px;
+      height: 500px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 2px 3px 7px rgba(0, 0, 0, .2);
+      flex-direction: column;
+
+      .cls-login-left-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90px;
+        margin-top: 100px;
+        margin-bottom: 30px;
+
+        .cls-login-left-logo-img {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 90px;
+        }
+
+        .cls-login-left-logo-title {
+          margin-left: 16px;
+          justify-content: center;
+          align-items: center;
+          display: flex;
+          height: 90px;
+          font-size: 40px;
+
+        }
+      }
+
+      .cls-login-left-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+
+        .cls-login-left-form-captcha {
+          display: flex;
+          justify-content: space-between;
+
+          .cls-login-left-form-captcha-img {
+            width: 33%;
+            height: 38px;
+            background: #ccc;
+
+            img {
+              width: 100%;
+              height: 100%;
+              vertical-align: middle;
+            }
+          }
+        }
+
+      }
+    }
+
+    .cls-login-right {
+      display: flex;
       background-size: cover;
       width: 40%;
       height: 60%;
-      float: right !important;
-    }
-
-    .login_panel_form {
-      width: 420px;
-      background-color: #fff;
-      padding: 40px 40px 40px 40px;
-      border-radius: 10px;
-      box-shadow: 2px 3px 7px rgba(0, 0, 0, .2);
-
-      .login_panel_form_title {
-        display: flex;
-        align-items: center;
-        margin: 30px 0;
-
-        .login_panel_form_title_logo {
-          width: 90px;
-          height: 72px;
-        }
-
-        .login_panel_form_title_p {
-          font-size: 40px;
-          padding-left: 20px;
-        }
-      }
-
-      .vPicBox {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-      }
-
-      .vPic {
-        width: 33%;
-        height: 38px;
-        background: #ccc;
-
-        img {
-          width: 100%;
-          height: 100%;
-          vertical-align: middle;
-        }
-      }
-    }
-
-    .login_panel_foot {
-      position: absolute;
-      bottom: 20px;
-
-      .links {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        .link-icon {
-          width: 30px;
-          height: 30px;
-        }
-      }
-
-      .copyright {
-        color: #777777;
-        margin-top: 5px;
-      }
+      background-image: url("@/assets/login-right.svg");
     }
   }
+
 }
-
-//小屏幕不显示右侧，将登录框居中
-@media (max-width: 750px) {
-  .login_panel_right {
-    display: none;
-  }
-
-  .login_panel {
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-  }
-
-  .login_panel_form {
-    width: 100%;
-  }
-}
-
-/*
-  powerBy : bypanghu@163.com
-*/
 </style>

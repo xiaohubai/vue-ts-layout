@@ -1,8 +1,6 @@
-import config from '@/config/index'
-
 export default function getPageTitle(pageTitle) {
     if (pageTitle) {
-        return `${pageTitle} - ${config.appName}`
+        return `${pageTitle} - ${import.meta.env.VITE_LOGO_NAME}`
     }
-    return `${config.appName}`
+    return `${import.meta.env.VITE_LOGO_NAME}`
 }

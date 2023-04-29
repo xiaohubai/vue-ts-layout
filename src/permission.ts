@@ -16,6 +16,7 @@ router.beforeEach(async (to: any ) => {
 
     const { defaultRouter } = storeToRefs(settingStore)
     const { token } = storeToRefs(userStore)
+
     to.meta.matched = [...to.matched]
     // Check if the route is in the whitelist
     if (whiteList.includes(to.name)) {
