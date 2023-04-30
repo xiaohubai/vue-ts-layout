@@ -16,71 +16,72 @@ vue-ts-layout 是一个前端模板，它基于 Vite4.x、Vue3.x、Vue-router4.x
 - [eslint配置](https://xiaohubai.github.io/docs/install/#eslint)
 ```sh
 $ git clone https://github.com/xiaohubai/vue-ts-layout.git
+$ cd vue-ts-layout
 $ pnpm install
 $ pnpm run dev
 ```
 
 ## 使用说明
-```sh
+```go
 ├── README.md
-├── deploy						#部署
-│   ├── Makefile				#make指令
-│   ├── docker-compose.yml		#docker-compose.yml
-│   └── volumes					#挂载目录
-├── mock						#mock
-│   ├── index.ts				#mock对象
-│   ├── mockProdServer.ts		#生产环境配置
-│   └── modules					#mock对象实际接口
-├── public						#静态资源
-│   └── favicon.svg				#网址图标
-├── src							#内部实现
-│   ├── App.vue					#监听语言配置,实时更改i8n和element-plus语言
-│   ├── api						#api接口
-│   ├── assets					#资源
-│   ├── i18n					#i8n
-│   │   ├── en.json				#定义英文
-│   │   ├── index.ts			#实例i8n
-│   │   └── zh.json				#定义中文
-│   ├── layout					#布局
-│   │   ├── components			#组件
-│   │   │   ├── aside			#侧边栏
-│   │   │   │   ├── index.vue	#logo和首层路由
-│   │   │   │   └── submenu.vue #多级路由
-│   │   │   ├── footer			#页脚
+├── deploy						//部署
+│   ├── Makefile				//make指令
+│   ├── docker-compose.yml		//docker-compose.yml
+│   └── volumes					//挂载目录
+├── mock						//mock
+│   ├── index.ts				//mock对象
+│   ├── mockProdServer.ts		//生产环境配置
+│   └── modules					//mock对象实际接口
+├── public						//静态资源
+│   └── favicon.svg				//网址图标
+├── src							//内部实现
+│   ├── App.vue					//监听语言配置,实时更改i8n和element-plus语言
+│   ├── api						//api接口
+│   ├── assets					//资源
+│   ├── i18n					//i8n
+│   │   ├── en.json				//定义英文
+│   │   ├── index.ts			//实例i8n
+│   │   └── zh.json				//定义中文
+│   ├── layout					//布局
+│   │   ├── components			//组件
+│   │   │   ├── aside			//侧边栏
+│   │   │   │   ├── index.vue	//logo和首层路由
+│   │   │   │   └── submenu.vue //多级路由
+│   │   │   ├── footer			//页脚
 │   │   │   │   └── index.vue
-│   │   │   ├── header						#header
-│   │   │   │   ├── breadcrumb.vue			#面包屑(多级链路)
-│   │   │   │   ├── collapse.vue			#控制折叠
-│   │   │   │   ├── index.vue				#header布局
-│   │   │   │   ├── notice.vue				#即时消息
-│   │   │   │   ├── profile.vue				#头像和个人中心
-│   │   │   │   └── tabs-breadcrumb.vue		#tab面包屑
-│   │   │   └── setting						#布局的个性化设置
+│   │   │   ├── header						//header
+│   │   │   │   ├── breadcrumb.vue			//面包屑(多级链路)
+│   │   │   │   ├── collapse.vue			//控制折叠
+│   │   │   │   ├── index.vue				//header布局
+│   │   │   │   ├── notice.vue				//即时消息
+│   │   │   │   ├── profile.vue				//头像和个人中心
+│   │   │   │   └── tabs-breadcrumb.vue		//tab面包屑
+│   │   │   └── setting						//布局的个性化设置
 │   │   │       └── index.vue
-│   │   └── index.vue						#整体布局
-│   ├── main.ts								#业务入口
-│   ├── permission.ts						#路由拦截器
-│   ├── pinia								#store
-│   │   ├── index.ts						#pinia实例
+│   │   └── index.vue						//整体布局
+│   ├── main.ts								//业务入口
+│   ├── permission.ts						//路由拦截器
+│   ├── pinia								//store
+│   │   ├── index.ts						//pinia实例
 │   │   └── modules
-│   │       ├── dict.ts						#字典序
-│   │       ├── router.ts					#动态路由
-│   │       ├── setting.ts					#设置
-│   │       └── user.ts						#用户基本信息和token
-│   ├── router								#基本路由和白名单
+│   │       ├── dict.ts						//字典序
+│   │       ├── router.ts					//动态路由
+│   │       ├── setting.ts					//设置
+│   │       └── user.ts						//用户基本信息和token
+│   ├── router								//基本路由和白名单
 │   │   └── index.ts
-│   ├── style								#样式
+│   ├── style								//样式
 │   │   └── index.scss
-│   ├── utils								#工具
-│   │   ├── asyncRouter.ts					#导入路由的component文件路径
-│   │   ├── pageTitle.ts					#网址标题
-│   │   └── request.ts						#axios封装
-│   └── views								#页面
-├── index.html								#访问入口
+│   ├── utils								//工具
+│   │   ├── asyncRouter.ts					//导入路由的component文件路径
+│   │   ├── pageTitle.ts					//网址标题
+│   │   └── request.ts						//axios封装
+│   └── views								//页面
+├── index.html								//访问入口
 ├── package.json
 ├── pnpm-lock.yaml
 ├── tsconfig.json
-└── vite.config.ts							#vite配置
+└── vite.config.ts							//vite配置
 ```
 ## vscode相关插件配置
 [地址](https://xiaohubai.github.io/docs/install/#vscode%E9%85%8D%E7%BD%AE)
