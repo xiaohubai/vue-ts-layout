@@ -24,6 +24,7 @@ export default defineConfig(({ mode }) => {
         }
       }
     },
+
     build: {
       //https://cn.vitejs.dev/config/build-options.html
       outDir: 'dist', // 产出目录
