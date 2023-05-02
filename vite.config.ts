@@ -35,8 +35,8 @@ export default defineConfig(({ mode }) => {
       viteMockServe({
         supportTs: true,
         mockPath: 'mock',
-        localEnabled: Boolean(env.VITE_DEV_MOCK), // mock本地环境开关
-        prodEnabled: Boolean(env.VITE_PROD_MOCK), // mock生产环境开关
+        localEnabled: env.VITE_DEV_MOCK === 'true' ? true : false, // mock本地环境开关
+        prodEnabled: env.VITE_PROD_MOCK === 'true' ? true : false, // mock生产环境开关
         injectCode: `import { setupProdMockServer } from '../mock/mockProdServer'; setupProdMockServer()`, //injectFile默认是src/main.ts
         watchFiles: true,
         logger: false
