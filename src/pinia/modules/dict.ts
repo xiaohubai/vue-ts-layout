@@ -4,11 +4,13 @@ import { ElMessage } from 'element-plus'
 
 export const useDictStore = defineStore('dict', {
     state: () => ({
-        state_info: {},
-        lang_info: [],
-        role_info: [],
-        method_info: []
-
+        filename: '',
+        dictInfo: {
+            state: {},
+            lang: [],
+            role: [],
+            method: []
+        }
     }),
     persist: true,
     getters: {
@@ -17,10 +19,14 @@ export const useDictStore = defineStore('dict', {
         async getDict() {
             const res: any = await getDictList()
             if (res.code === 0) {
-                this.$state = res.data
+                this.dictInfo = res.data.dictInfo
+                this.filename = res.data.filename
+                if (res.data.filename.split('.')[1] === undefined) {
+                    ElMessage({ type: 'error', message: '获取字典序失败' })
+                    return false
+                }
                 return true
             }
-            ElMessage({ type: 'error', message: '获取字典序失败' })
             return false
         }
     }

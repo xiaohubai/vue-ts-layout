@@ -3,7 +3,7 @@
     <el-col :span="8">
       <el-card class="show-card">
         <div class="show-avatar"
-             :style="{ 'background-image': `url(${avatar})`, 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
+          :style="{ 'background-image': `url(${avatar})`, 'background-repeat': 'no-repeat', 'background-size': 'cover' }">
           <span class="update" @click="upload">
             <el-icon>
               <edit />
@@ -66,7 +66,7 @@
                   <el-icon>
                     <Check />
                   </el-icon>
-                  {{ state_info[state] }}
+                  {{ dictInfo.state[state] }}
                 </el-text>
               </div>
             </el-tab-pane>
@@ -163,7 +163,7 @@ const {
 } = storeToRefs(userStore)
 
 const { UID } = storeToRefs(userStore)
-const { state_info } = storeToRefs(dictStore)
+const { dictInfo } = storeToRefs(dictStore)
 
 const dialogVisible = ref(false)
 const form = ref({

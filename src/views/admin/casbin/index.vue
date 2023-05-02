@@ -7,12 +7,12 @@
         </el-form-item>
         <el-form-item label="所属角色">
           <el-select v-model="searchForm.roleIDs" clearable placeholder="请选择">
-            <el-option v-for="item in role_info" :key="item.ID" :label="`${item.value}`" :value="item.key" />
+            <el-option v-for="item in dictInfo.role" :key="item.ID" :label="`${item.value}`" :value="item.key" />
           </el-select>
         </el-form-item>
         <el-form-item label="请求">
           <el-select v-model="searchForm.method" clearable placeholder="请选择">
-            <el-option v-for="item in method_info" :key="item.ID" :label="`${item.value}`" :value="item.key" />
+            <el-option v-for="item in dictInfo.method" :key="item.ID" :label="`${item.value}`" :value="item.key" />
           </el-select>
         </el-form-item>
       </el-form>
@@ -53,8 +53,8 @@
     </el-table>
     <div class="cls-pagination">
       <el-pagination v-model:current-page="page" v-model:page-size="pageSize" :page-sizes="[10, 30, 50, 100]"
-                     :total="total" layout="total, sizes, prev, pager, next, jumper" @current-change="handleCurrentChange"
-                     @size-change="handleSizeChange" />
+        :total="total" layout="total, sizes, prev, pager, next, jumper" @current-change="handleCurrentChange"
+        @size-change="handleSizeChange" />
     </div>
   </el-card>
   <el-dialog v-model="dialogVisible" :before-close="handleClose" :title="dialogTitle">
@@ -64,7 +64,7 @@
       </el-form-item>
       <el-form-item label="method" style="width:40%">
         <el-select v-model="form.method" clearable placeholder="请选择">
-          <el-option v-for="item in method_info" :key="item.ID" :label="`${item.value}`" :value="item.key" />
+          <el-option v-for="item in dictInfo.method" :key="item.ID" :label="`${item.value}`" :value="item.key" />
         </el-select>
       </el-form-item>
       <el-form-item label="path" prop="path" style="width:85%">
@@ -116,7 +116,7 @@ const searchReset = () => {
 }
 
 const dictStore = useDictStore()
-const { role_info, method_info } = storeToRefs(dictStore)
+const { dictInfo } = storeToRefs(dictStore)
 
 interface Casbin {
   ID: number;

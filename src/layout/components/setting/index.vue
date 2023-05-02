@@ -23,13 +23,13 @@
         <el-form model="form" label-position="left" label-width="auto" size="default">
           <el-form-item label="语言">
             <el-select v-model="form.lang" @change="changeSetting('lang', form.lang)">
-              <el-option v-for="item in lang_info" :key="item.key" :label="item.value" :value="item.key" />
+              <el-option v-for="item in dictInfo.lang" :key="item.key" :label="item.value" :value="item.key" />
             </el-select>
           </el-form-item>
           <el-form-item label="默认路由">
             <el-cascader v-model="form.defaultRouter" :options="menuOptions"
-                         :props="{ checkStrictly: true, label: 'title', value: 'name', emitPath: false }" :show-all-levels="false"
-                         @change="changeSetting('defaultRouter', form.defaultRouter)" />
+              :props="{ checkStrictly: true, label: 'title', value: 'name', emitPath: false }" :show-all-levels="false"
+              @change="changeSetting('defaultRouter', form.defaultRouter)" />
           </el-form-item>
 
           <el-form-item label="面包屑">
@@ -56,11 +56,11 @@
 
           <el-form-item label="选中颜色">
             <el-color-picker v-model="form.activeTextColor"
-                             @change="changeSetting('activeTextColor', form.activeTextColor)" />
+              @change="changeSetting('activeTextColor', form.activeTextColor)" />
           </el-form-item>
           <el-form-item label="选中背景色">
             <el-color-picker v-model="form.activeBackgroundColor"
-                             @change="changeSetting('activeBackgroundColor', form.activeBackgroundColor)" />
+              @change="changeSetting('activeBackgroundColor', form.activeBackgroundColor)" />
           </el-form-item>
         </el-form>
       </div>
@@ -76,7 +76,7 @@ import { useDictStore } from '@/pinia/modules/dict'
 import { getRoleMenuList } from '@/api/menu'
 
 const dictStore = useDictStore()
-const { lang_info } = storeToRefs(dictStore)
+const { dictInfo } = storeToRefs(dictStore)
 const settingStore = useSettingStore()
 const {
   lang,
@@ -87,6 +87,7 @@ const {
   activeTextColor,
   activeBackgroundColor
 } = storeToRefs(settingStore)
+
 
 const form = ref({
   lang: lang,

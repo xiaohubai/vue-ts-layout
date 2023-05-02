@@ -89,23 +89,6 @@ export default [
                                             'sort': 2
                                         },
                                         'children': null
-                                    },
-                                    {
-                                        'path': '/dict',
-                                        'name': 'dict',
-                                        'component': 'views/dict/index.vue',
-                                        'redirect': '',
-                                        'meta': {
-                                            'ID': 14,
-                                            'parentID': 3,
-                                            'roleIDs': '0',
-                                            'title': '字典管理',
-                                            'icon': 'notebook',
-                                            'hidden': false,
-                                            'keepAlive': true,
-                                            'sort': 3
-                                        },
-                                        'children': null
                                     }
                                 ]
                             },
@@ -303,23 +286,6 @@ export default [
                                             'hidden': false,
                                             'keepAlive': true,
                                             'sort': 2
-                                        },
-                                        'children': null
-                                    },
-                                    {
-                                        'path': '/dict',
-                                        'name': 'dict',
-                                        'component': 'views/dict/index.vue',
-                                        'redirect': '',
-                                        'meta': {
-                                            'ID': 14,
-                                            'parentID': 3,
-                                            'roleIDs': '0',
-                                            'title': '字典管理',
-                                            'icon': 'notebook',
-                                            'hidden': false,
-                                            'keepAlive': true,
-                                            'sort': 3
                                         },
                                         'children': null
                                     }
