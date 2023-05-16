@@ -21,10 +21,6 @@ export const useDictStore = defineStore('dict', {
             if (res.code === 0) {
                 this.dictInfo = res.data.dictInfo
                 this.filename = res.data.filename
-                if (res.data.filename.split('.')[1] === undefined) {
-                    ElMessage({ type: 'error', message: '获取字典序失败' })
-                    return false
-                }
                 return true
             }
             return false

@@ -44,7 +44,6 @@
 
 <script setup lang="ts" name="logins">
 import { ref, reactive } from 'vue'
-import { ElMessage } from 'element-plus'
 import { captcha } from '@/api/user'
 import { useUserStore } from '@/pinia/modules/user'
 import type { FormInstance, FormRules } from 'element-plus'
@@ -62,7 +61,7 @@ const form = ref({
   username: 'admin',
   password: '123456',
   captcha: '',
-  captchaId: ''
+  captchaID: ''
 })
 const captchaImg = ref('')
 
@@ -98,24 +97,24 @@ const getCaptcha = async () => {
   const res: any = await captcha()
   if (res.code == 0) {
     captchaImg.value = res.data.picPath
-    form.value.captchaId = res.data.captchaId
+    form.value.captchaID = res.data.captchaID
   }
 }
 getCaptcha()
 
 const submitLoginForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
-  await formEl.validate((valid) => {
-    if (valid) {
-      const ok: any = userStore.LoginIn(form)
-      if (!ok) {
-        ElMessage({ type: 'error', message: '登录失败' })
-        getCaptcha()
-      }
-    } else {
-      return false
-    }
-  })
+  let valid = await formEl.validate((valid) => { return valid })
+  if (!valid) {
+    getCaptcha()
+    return
+  }
+  const ok: any = await userStore.LoginIn(form.value)
+  if (!ok) {
+    getCaptcha()
+    return false
+  }
+  return true
 }
 
 

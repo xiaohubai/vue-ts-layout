@@ -1,9 +1,10 @@
 <template>
   <div class="cls-breadcrumb">
     <el-tabs v-model="activeRouteName" type="card"
-             :closable="!(activeRouteHistoryList.length === 1 && activeRouteName === defaultRouter)"
-             @tab-click="changeTab" @tab-remove="removeTab">
-      <el-tab-pane v-for="item in activeRouteHistoryList" :key="item.path" :label="item.title" :name="item.name" :tab="item">
+      :closable="!(activeRouteHistoryList.length === 1 && activeRouteName === defaultRouter)" @tab-click="changeTab"
+      @tab-remove="removeTab">
+      <el-tab-pane v-for="item in activeRouteHistoryList" :key="item.path" :label="item.title" :name="item.name"
+        :tab="item">
         <template #label>
           <span :tab="item" :style="{ color: activeRouteName === item.name ? activeTextColor : '#333' }">
             <i class="cls-dot" :style="{ backgroundColor: activeRouteName === item.name ? activeTextColor : '#ddd' }" />

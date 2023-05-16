@@ -54,11 +54,11 @@
             </el-radio-group>
           </el-form-item>
 
-          <el-form-item label="选中颜色">
+          <el-form-item label="选中面包屑文本颜色">
             <el-color-picker v-model="form.activeTextColor"
               @change="changeSetting('activeTextColor', form.activeTextColor)" />
           </el-form-item>
-          <el-form-item label="选中背景色">
+          <el-form-item label="选中菜单路由背景色">
             <el-color-picker v-model="form.activeBackgroundColor"
               @change="changeSetting('activeBackgroundColor', form.activeBackgroundColor)" />
           </el-form-item>

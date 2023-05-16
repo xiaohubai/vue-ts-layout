@@ -10,10 +10,12 @@
       <template v-for="subitem in menu.children" :key="subitem.path">
         <template v-if="!subitem.children">
           <el-menu-item v-if="!subitem.meta.hidden" :key="subitem.path" :index="subitem.path">
-            <el-icon v-if="subitem.meta.icon">
-              <component :is="subitem.meta.icon" />
-            </el-icon>
-            <span>{{ subitem.meta.title }}</span>
+            <div class="cls-menu-item">
+              <el-icon v-if="subitem.meta.icon">
+                <component :is="subitem.meta.icon" />
+              </el-icon>
+              <span>{{ subitem.meta.title }}</span>
+            </div>
           </el-menu-item>
         </template>
         <!-- 二级+ 菜单 -->
@@ -23,7 +25,8 @@
   </el-sub-menu>
 </template>
 <script setup lang="ts" name="Submenu">
- defineProps({
+import { ref, watch } from 'vue'
+const props = defineProps({
   menu: {
     type: Object,
     default: () => ({})
@@ -37,5 +40,33 @@
     type: Boolean
   }
 })
+
+const activeBackgroundColor = ref(props.theme.activeBackgroundColor)
+watch(() => props.theme, () => {
+  activeBackgroundColor.value = props.theme.activeBackgroundColor
+})
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.cls-menu-item {
+  width: 100%;
+  flex: 1;
+  height: 44px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 4px;
+}
+
+.el-menu-item.is-active {
+  .cls-menu-item {
+    color: #fff !important;
+    background: v-bind(activeBackgroundColor) !important;
+    border-radius: 4px;
+    box-shadow: 0 0 2px 1px v-bind(activeBackgroundColor) !important;
+  }
+}
+
+.el-menu-item:hover {
+  background: transparent;
+}
+</style>

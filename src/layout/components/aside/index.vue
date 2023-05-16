@@ -16,10 +16,12 @@
             <!-- 一级菜单 -->
             <template v-if="!(item.children && item.children.length)">
               <el-menu-item v-if="!item.meta.hidden" :key="item.path" :index="item.path">
-                <el-icon v-if="item.meta.icon">
-                  <component :is="item.meta.icon" />
-                </el-icon>
-                <span :hidden="collapse">{{ item.meta.title }}</span>
+                <div class="cls-menu-item">
+                  <el-icon v-if="item.meta.icon">
+                    <component :is="item.meta.icon" />
+                  </el-icon>
+                  <span :hidden="collapse">{{ item.meta.title }}</span>
+                </div>
               </el-menu-item>
             </template>
             <!-- 二级+ 菜单 -->
@@ -127,9 +129,18 @@ watch(() => router.currentRoute.value, (route: any) => { AddCurrentRouteToPinia(
 </script>
 
 <style lang="scss" scoped>
+.cls-menu-item {
+  width: 100%;
+  height: 44px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .cls-aside {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
 
   .cls-logo {
@@ -166,5 +177,18 @@ watch(() => router.currentRoute.value, (route: any) => { AddCurrentRouteToPinia(
 
 .el-menu {
   border: none;
+}
+
+.el-menu-item.is-active {
+  .cls-menu-item {
+    color: #fff !important;
+    background: v-bind(activeBackgroundColor) !important;
+    border-radius: 4px;
+    box-shadow: 0 0 2px 1px v-bind(activeBackgroundColor) !important;
+  }
+}
+
+.el-menu-item:hover {
+  background: transparent;
 }
 </style>

@@ -12,7 +12,7 @@
       </div>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item icon="avatar">
+          <el-dropdown-item disabled icon="avatar">
             {{ roleName }}
           </el-dropdown-item>
           <el-dropdown-item icon="User" @click="toPerson">
@@ -36,33 +36,36 @@ const userStore = useUserStore()
 const { nickName, avatar, roleName } = storeToRefs(userStore)
 
 const toPerson = () => {
-    router.push({ name: 'person' })
+  router.push({ name: 'person' })
 }
 
 </script>
 
 <style lang="scss" scoped>
 .cls-avatar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 
-    .cls-img {
-        width: 30px;
-        height: 30px;
-        background: #fff;
-        border-radius: 50%;
-        margin-right: 10px;
-    }
+  .cls-img {
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    border-radius: 50%;
+    border-width: 1px;
+    border-style: dashed;
+    border-color: #827d7d;
+    margin-right: 10px;
+  }
 
-    .cls-text {
-        color: #333;
-        margin-right: 5px;
-    }
+  .cls-text {
+    color: #333;
+    margin-right: 5px;
+  }
 
-    .cls-icon {
-        margin-top: 4px;
-    }
+  .cls-icon {
+    margin-top: 4px;
+  }
 }
 </style>

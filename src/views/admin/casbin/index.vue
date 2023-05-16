@@ -1,33 +1,36 @@
 <template>
   <el-card>
-    <div class="cls-search-form">
-      <el-form :inline="true" :model="searchForm">
-        <el-form-item label="路径">
-          <el-input v-model="searchForm.path" placeholder="路径" />
-        </el-form-item>
-        <el-form-item label="所属角色">
-          <el-select v-model="searchForm.roleIDs" clearable placeholder="请选择">
-            <el-option v-for="item in dictInfo.role" :key="item.ID" :label="`${item.value}`" :value="item.key" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="请求">
-          <el-select v-model="searchForm.method" clearable placeholder="请选择">
-            <el-option v-for="item in dictInfo.method" :key="item.ID" :label="`${item.value}`" :value="item.key" />
-          </el-select>
-        </el-form-item>
-      </el-form>
-    </div>
-    <div class="cls-btn-search-casbin">
-      <el-button type="primary" icon="search" @click="getTableData">
-        查询
-      </el-button>
-      <el-button icon="refresh" @click="searchReset">
-        重置
-      </el-button>
+    <div class="cls-search">
+      <div class="cls-search-form">
+        <el-form :inline="true" :model="searchForm">
+          <el-form-item label="路径">
+            <el-input v-model="searchForm.path" placeholder="路径" />
+          </el-form-item>
+          <el-form-item label="所属角色">
+            <el-select v-model="searchForm.roleIDs" clearable placeholder="请选择">
+              <el-option v-for="item in dictInfo.role" :key="item.ID" :label="`${item.value}`" :value="item.key" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="请求">
+            <el-select v-model="searchForm.method" clearable placeholder="请选择">
+              <el-option v-for="item in dictInfo.method" :key="item.ID" :label="`${item.value}`" :value="item.key" />
+            </el-select>
+          </el-form-item>
+        </el-form>
+      </div>
+      <div class="cls-search-btn">
+        <el-button type="primary" icon="search" @click="getTableData">
+          查询
+        </el-button>
+        <el-button icon="refresh" @click="searchReset">
+          重置
+        </el-button>
+      </div>
     </div>
   </el-card>
+
   <el-card class="cls-casbin-card">
-    <div class="cls-btn-add-casbin">
+    <div class="cls-add-casbin-btn">
       <el-button type="primary" icon="Plus" @click="addCasbin()">
         新增权限
       </el-button>
@@ -249,25 +252,33 @@ const submitDialog = async () => {
 </script>
 
 <style lang="scss" scoped>
-.cls-btn-add-casbin {
+.cls-add-casbin-btn {
   margin-bottom: 20px;
 }
 
-.cls-search-form {
+.cls-search {
   display: flex;
-  justify-content: flex-start;
   align-items: center;
+  justify-content: space-between;
+
+  .cls-search-form {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .cls-search-btn {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
 }
+
 
 .cls-casbin-card {
   margin-top: 14px;
 }
 
-.cls-btn-search-casbin {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 14px;
-}
 
 .cls-pagination {
   display: flex;
