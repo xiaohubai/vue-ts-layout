@@ -10,8 +10,8 @@
         </div>
       </div>
       <div class="cls-header-right">
-        <div class="cls-notice">
-          <Notice />
+        <div class="cls-message">
+          <Message />
         </div>
         <div class="cls-profile">
           <Profile />
@@ -30,7 +30,7 @@ import Collapse from './collapse.vue'
 import TabBreadcrumb from './tabs-breadcrumb.vue'
 import Breadcrumb from './breadcrumb.vue'
 import Profile from './profile.vue'
-import Notice from './notice.vue'
+import Message from './message.vue'
 import { storeToRefs } from 'pinia'
 import { useSettingStore } from '@/pinia/modules/setting'
 
@@ -40,58 +40,58 @@ const { breadcrumb } = storeToRefs(settingStore)
 
 <style lang="scss" scoped>
 .cls-header {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .cls-header-up {
+  display: flex;
+  height: 60px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+
+  .cls-header-left {
     display: flex;
-    height: 60px;
-    width: 100%;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
 
-    .cls-header-left {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-
-        .cls-collapse {
-            margin-top: 6px;
-            margin-left: 20px;
-        }
-
-        .cls-breadcrumb {
-            font-size: 16px;
-            margin-left: 20px;
-        }
+    .cls-collapse {
+      margin-top: 6px;
+      margin-left: 20px;
     }
 
-    .cls-header-right {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-
-        .cls-profile {
-            margin-right: 10px;
-        }
-
-        .cls-notice {
-            margin-right: 10px;
-        }
+    .cls-breadcrumb {
+      font-size: 16px;
+      margin-left: 20px;
     }
+  }
+
+  .cls-header-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .cls-profile {
+      margin-right: 10px;
+    }
+
+    .cls-message {
+      margin-right: 10px;
+    }
+  }
 }
 
 .cls-header-down {
-    display: flex;
-    height: 40px;
-    width: 100%;
+  display: flex;
+  height: 40px;
+  width: 100%;
 }
 
 .el-divider {
-    padding: 0;
-    margin: 0;
-    height: 0;
+  padding: 0;
+  margin: 0;
+  height: 0;
 }
 </style>
