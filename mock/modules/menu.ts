@@ -101,7 +101,7 @@ export default [
                                     'ID': 6,
                                     'parentID': 1,
                                     'roleIDs': '0',
-                                    'title': '关于我们',
+                                    'title': '关于',
                                     'icon': 'star',
                                     'hidden': false,
                                     'keepAlive': true,
@@ -127,39 +127,21 @@ export default [
                                 'children': null
                             },
                             {
-                                'path': '/others',
-                                'name': 'others',
-                                'component': '',
-                                'redirect': '/404',
+                                'path': '/404',
+                                'name': '404',
+                                'component': 'views/error/index.vue',
+                                'redirect': '',
                                 'meta': {
-                                    'ID': 8,
-                                    'parentID': 1,
+                                    'ID': 9,
+                                    'parentID': 8,
                                     'roleIDs': '0',
-                                    'title': '其他页面',
-                                    'icon': 'more',
-                                    'hidden': false,
+                                    'title': '404',
+                                    'icon': 'InfoFilled',
+                                    'hidden': true,
                                     'keepAlive': true,
                                     'sort': 5
                                 },
-                                'children': [
-                                    {
-                                        'path': '/404',
-                                        'name': '404',
-                                        'component': 'views/error/index.vue',
-                                        'redirect': '',
-                                        'meta': {
-                                            'ID': 9,
-                                            'parentID': 8,
-                                            'roleIDs': '0',
-                                            'title': '404',
-                                            'icon': 'InfoFilled',
-                                            'hidden': true,
-                                            'keepAlive': true,
-                                            'sort': 1
-                                        },
-                                        'children': null
-                                    }
-                                ]
+                                'children': null
                             }
                         ]
                     },
