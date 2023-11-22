@@ -12,14 +12,12 @@
       ]
     },
     "types": [
-      "vite/client",
-      "node"
+      "node" 
     ],
     "allowSyntheticDefaultImports": true,
     "allowJs": false,
     "noImplicitAny": false,
     "strictNullChecks": false,
-    //
     "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ESNext",
