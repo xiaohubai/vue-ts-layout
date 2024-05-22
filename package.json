@@ -9,27 +9,27 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
-    "@types/node": "^18.19.26",
+    "@types/node": "^18.19.31",
     "axios": "^1.6.8",
     "echarts": "^5.5.0",
-    "element-plus": "^2.6.1",
+    "element-plus": "^2.7.2",
     "normalize.css": "^8.0.1",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
-    "sass": "^1.72.0",
+    "sass": "^1.76.0",
     "vite-plugin-mock": "^2.9.8",
     "vite-plugin-vue-setup-extend-plus": "^0.1.0",
-    "vue": "^3.4.21",
-    "vue-i18n": "^9.10.2",
-    "vue-router": "^4.3.0"
+    "vue": "^3.4.26",
+    "vue-i18n": "^9.13.1",
+    "vue-router": "^4.3.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "@vitejs/plugin-vue": "^4.6.2",
     "eslint": "^8.57.0",
-    "eslint-plugin-vue": "^9.23.0",
+    "eslint-plugin-vue": "^9.25.0",
     "typescript": "^4.9.5",
-    "vite": "^4.5.2"
+    "vite": "^4.5.3"
   }
 }
